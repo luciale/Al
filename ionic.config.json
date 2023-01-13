@@ -1,0 +1,7 @@
+{
+  "name": "AlInstanteGT",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
