@@ -162,8 +162,8 @@
     --ion-background-color: #04292a;
     --ion-background-color-rgb: 4,41,42;
 
-    --ion-text-color: #479295;
-    --ion-text-color-rgb: 71, 146, 149;
+    --ion-text-color:  #ffffff;
+    --ion-text-color-rgb: 255,255,255;
 
     --ion-color-step-50: #0d0d0d;
     --ion-color-step-100: #04292a;
@@ -203,10 +203,10 @@
    */
 
   .md body {
-    --ion-background-color: #ffff;
+    --ion-background-color: #ffffff
     --ion-background-color-rgb: 4, 41, 42;
-
-    --ion-text-color:  #ffff;
+    
+    --ion-text-color:  #ffffff;
     --ion-text-color-rgb: 255,255,255;
 
     --ion-border-color: #222222;
@@ -238,6 +238,6 @@
 
     --ion-tab-bar-background: #04292a;
 
-    --ion-card-background: #ffff;
+    --ion-card-background: #ffffff;
   }
 }

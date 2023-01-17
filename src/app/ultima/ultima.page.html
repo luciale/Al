@@ -8,5 +8,25 @@
 </ion-header>
 
 <ion-content>
+  <ion-row class ="iconlist">
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor ="let new of news">
+      <ion-card>
+        <img src="assets/images/{{new.image}}"/>
+        <div class= "card-title">
+          {{new.title}}
+        </div>
+      </ion-card>
+
+    </ion-col>
+  </ion-row>
+    
+  <ion-list>
+    <ion-item *ngFor ="let new of news">
+      <ion-label>
+        <h2 >{{new.title}}</h2>
+        <p> {{new.description}}</p>
+      </ion-label>
+    </ion-item>
+  </ion-list>
 
 </ion-content>
