@@ -8,12 +8,11 @@
 </ion-header>
 
 <ion-content class ="iconlist">
-  <ion-slides   #slider loop="true" pager="true" [options]=" slideOptions">
+  <ion-slides   #slider loop="true" pager="true" [options]=" slideOptions"  >
     <ion-slide  *ngFor ="let new of news">
       <ion-card (click) = "goToRoute(new)">
         <img src="assets/images/{{new.image}}" />
         <div class= "card-title">{{new.title}} </div>
-        <div class ="card-text">{{new.description}}</div>
       </ion-card>
 
     </ion-slide>
@@ -24,14 +23,14 @@
 
   <ion-row>
     <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor ="let new of news">
-      <ion-card class="card1">
+      <ion-card class="card1" [routerLink]="['/new',new.id]">
         <ion-grid>
           <ion-row>
             <ion-col class="card1-title">{{new.title}}</ion-col>
             
           </ion-row>
             <ion-row>
-               <ion-col class="card1-text">{{new.details}}</ion-col>
+               <ion-col class="card1-text">{{new.description}}</ion-col>
                <ion-col> <img src="assets/images/{{new.image}}" /></ion-col>
         
             </ion-row>

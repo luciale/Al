@@ -17,7 +17,9 @@ export class UltimaPage implements OnInit {
   slideOptions = {
     initialSlide: 0,
     slidesPerView: 1,
-    autoplay: true}
+    autoplay: true,
+    autoplayDisableOnInteraction: false
+  }
 
   news : any = [];
 
@@ -27,10 +29,9 @@ export class UltimaPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.http)
-    
+  
     this.getNews().subscribe(res=>{
-      console.log("Res",res)
+     
       this.news = res;
     });
   }
@@ -47,6 +48,23 @@ export class UltimaPage implements OnInit {
 
   goToRoute(val: any){
     console.log(val)
-   
+    if(val.type==1){
+      this.router.navigate(['/nacionales'])
+      
+    }
+    if(val.type==2){
+      this.router.navigate(['/internacionales'])
+    }
+    if(val.type==3){
+      this.router.navigate(['/deportes'])
+    }
+    if(val.type==4){
+      this.router.navigate(['/farandula'])
+    }
+    if(val.type==5){
+      this.router.navigate(['/tendencias'])
+    }
+ 
   }
+ 
 }

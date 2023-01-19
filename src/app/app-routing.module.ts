@@ -4,13 +4,10 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: '/ultima',
     pathMatch: 'full'
   },
-  {
-    path: 'folder/:id',
-    loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
-  },
+ 
   {
     path: 'home',
     loadChildren: () => import('./home/home.module').then( m => m.HomePageModule)
@@ -38,6 +35,11 @@ const routes: Routes = [
   {
     path: 'tendencias',
     loadChildren: () => import('./tendencias/tendencias.module').then( m => m.TendenciasPageModule)
+  },
+  {
+    
+    path: 'new/:id',
+    loadChildren: () => import('./new/new.module').then( m => m.NewPageModule)
   }
 ];
 
