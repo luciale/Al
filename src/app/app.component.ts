@@ -12,6 +12,8 @@ export class AppComponent {
     { title: 'Deportes', url: '/deportes', icon: 'football' },
     { title: 'Farándula', url: '/farandula', icon: 'star' },
     { title: 'Tendencias', url: '/tendencias', icon: 'trending-up' },
+    { title: 'Registro', url: '/registro', icon: 'trending-up' },
+    { title: 'Login', url: '/login', icon: 'trending-up' },
   ];
   public labels = [];
   constructor() {}

@@ -13,12 +13,17 @@ export class NacionalesPage implements OnInit {
   id: any;
   new_u: any ={};
   type_title : any;
+  ingresado= false;
   constructor(private http: HttpClient,
     private router: Router ) { }
 
   ngOnInit() {
-   
-  
+    console.log(this.ingresado)
+    this.ingresado= JSON.parse(localStorage.getItem('ingresado') as string);
+    if(this.ingresado== null){
+      this.ingresado= false;
+    }
+    console.log(this.ingresado)
     this.getNews().subscribe(res=>{
     
       for(let i =0; i< res.length; i++){

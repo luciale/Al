@@ -40,6 +40,14 @@ const routes: Routes = [
     
     path: 'new/:id',
     loadChildren: () => import('./new/new.module').then( m => m.NewPageModule)
+  },
+  {
+    path: 'registro',
+    loadChildren: () => import('./registro/registro.module').then( m => m.RegistroPageModule)
+  },
+  {
+    path: 'login',
+    loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
   }
 ];
 
