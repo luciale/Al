@@ -1,20 +1,23 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
 import { AgregarPageRoutingModule } from './agregar-routing.module';
-
+import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { AgregarPage } from './agregar.page';
 
+import { FileUploadOptions,FileTransferObject ,FileTransfer }  from '@awesome-cordova-plugins/file-transfer/ngx';
+import { ImagePicker, ImagePickerOptions } from '@awesome-cordova-plugins/image-picker/ngx';
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    AgregarPageRoutingModule
+    AgregarPageRoutingModule,
+    ReactiveFormsModule,
   ],
-  declarations: [AgregarPage]
+  declarations: [AgregarPage],
+  providers: [FileTransfer,ImagePicker]
 })
 export class AgregarPageModule {}

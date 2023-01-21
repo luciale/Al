@@ -14,6 +14,7 @@ export class AppComponent {
     { title: 'Tendencias', url: '/tendencias', icon: 'trending-up' },
     { title: 'Registro', url: '/registro', icon: 'trending-up' },
     { title: 'Login', url: '/login', icon: 'trending-up' },
+    { title: 'Agregar', url: '/agregar', icon: 'trending-up' },
   ];
   public labels = [];
   constructor() {}

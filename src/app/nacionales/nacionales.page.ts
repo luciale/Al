@@ -20,6 +20,7 @@ export class NacionalesPage implements OnInit {
   ngOnInit() {
     console.log(this.ingresado)
     this.ingresado= JSON.parse(localStorage.getItem('ingresado') as string);
+    console.log(this.ingresado)
     if(this.ingresado== null){
       this.ingresado= false;
     }
@@ -46,5 +47,8 @@ export class NacionalesPage implements OnInit {
           return res.data;
         })
       )
+    }
+    async Eliminar(){
+      console.log("se va a eliminar")
     }
 }

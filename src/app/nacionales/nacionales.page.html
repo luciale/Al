@@ -20,13 +20,15 @@
             <ion-row>
                <ion-col class="card1-text">{{new.description}}</ion-col>
                <ion-col> <img src="assets/images/{{new.image}}" /></ion-col>
-        
+               
             </ion-row>
         </ion-grid>
-        
-  
+      
       </ion-card>
-
+      <ion-button (click)="Eliminar()" *ngIf ="ingresado"> X
+      </ion-button>
+      <ion-button (click)="Eliminar()" *ngIf ="ingresado"> Editar
+      </ion-button>
     </ion-col>
   </ion-row>
 </ion-content>
