@@ -33,7 +33,8 @@ export class RegistroPage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Datos incompletos',
         message: 'Tienes que llenar todos los datos',
-        buttons: ['Aceptar']
+        buttons: ['Aceptar'],  
+        cssClass: 'alertCustomCss',
       });
   
       await alert.present();

@@ -87,3 +87,28 @@ ion-content{
     text-align: center;
     
   }
+  .select{
+    opacity: 0.90;
+    background-color: rgba( 71,146,149,0.3);
+    border-radius: 0%;
+   position: relative;
+    text-align: center;
+  }
+  
+  
+  .alertCustomCss .alert-wrapper {
+    background: #01686d!important;
+  }
+
+  ion-select {
+    --placeholder-color: #971e49;
+    --placeholder-opacity: 1;
+    width: 100%;
+    justify-content: center;
+  }
+  ion-select-option{
+    --placeholder-color: #971e49;
+    --placeholder-opacity: 1;
+    width: 100%;
+    justify-content: center;
+  }
