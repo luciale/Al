@@ -13,7 +13,8 @@ export class AppComponent {
     { title: 'Internacionales', url: '/internacionales', icon: 'globe' },
     { title: 'Deportes', url: '/deportes', icon: 'football' },
     { title: 'Farándula', url: '/farandula', icon: 'star' },
-    { title: 'Tendencias', url: '/tendencias', icon: 'trending-up' }
+    { title: 'Tendencias', url: '/tendencias', icon: 'trending-up' },
+    { title: 'Registrar Noticia', url: '/agregar', icon: 'add' },
   ];
   public appPages1 = [
     { title: 'Última Hora', url: '/ultima', icon: 'time' },
@@ -23,8 +24,7 @@ export class AppComponent {
     { title: 'Farándula', url: '/farandula', icon: 'star' },
     { title: 'Tendencias', url: '/tendencias', icon: 'trending-up' },
     { title: 'Registro', url: '/registro', icon: 'person-add' },
-    { title: 'Login', url: '/login', icon: 'log-in'},
-    { title: 'Registrar Noticia', url: '/agregar', icon: 'add' },
+    { title: 'Login', url: '/login', icon: 'log-in'}
   ];
   public labels = [];
   constructor() {}

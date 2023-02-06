@@ -1,21 +1,20 @@
 {
     "data": [
         {
-            "id" : 1,
-            "title": "Noticia1",
-            "description" :" Aqui se descripe la noticia 1",
-            "details": "Detalles de la Noticia 1 Detalles de la Noticia 1 Detalles de la Noticia 1 Detalles de la Noticia 1",
-            "image": "5.jpg",
+            "id" : 10,
+            "title": "aa",
+            "description" :"aa",
+            "details": "aa",
+            "image": "reina.jpg",
             "type" : 1,
             "state": 1,
             "createdAt": "01022023",
             "changedAt": "02022023"
-            
         },
         {
             "id" : 2,
-            "title": "Noticia2",
-            "description" :" Aqui se descripe la noticia 2",
+            "title": "Noticia 1 internacionales",
+            "description" :" Aqui se descripe la noticia 1 internacionales",
             "details": "Detalles de la Noticia 2 Detalles de la Noticia 2 Detalles de la Noticia 2 Detalles de la Noticia 2 Detalles de la Noticia 2Detalles de la Noticia 2 Detalles de la Noticia 2",
             "image": "2.png",
             "type" : 2,
@@ -26,8 +25,8 @@
         },
         {
             "id" : 3,
-            "title": "Noticia3",
-            "description" :" Aqui se descripe la noticia 3",
+            "title": "Noticia 1 Deportes",
+            "description" :" Aqui se descripe la noticia 1 deportes",
             "details": "Detalles de la Noticia 3 Detalles de la Noticia 3 ",
             "image": "3.jpg",
             "type" : 3,
@@ -38,8 +37,8 @@
         },
         {
             "id" : 4,
-            "title": "Noticia4",
-            "description" :" Aqui se descripe la noticia 4",
+            "title": "Noticia 1 Farandula",
+            "description" :" Aqui se descripe la noticia 1 Farandula",
             "details": "Detalles de la Noticia 4 Detalles de la Noticia 4 ",
             "image": "4.jpg",
             "type" : 4,
@@ -50,8 +49,8 @@
         },
         {
             "id" : 5,
-            "title": "Noticia5",
-            "description" :" Aqui se descripe la noticia 5",
+            "title": "Noticia 1 tendencias",
+            "description" :" Aqui se descripe la noticia 1 tendencias",
             "details": "Detalles de la Noticia 5 Detalles de la Noticia 5 ",
             "image": "5.jpg",
             "type" : 5,

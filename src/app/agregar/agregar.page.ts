@@ -11,6 +11,7 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
+import {map} from 'rxjs/operators'
 const IMAGE_DIR = 'stored-images';
 
 interface LocalFile {
@@ -26,6 +27,7 @@ interface LocalFile {
 export class AgregarPage implements OnInit {
   formularioRegistro: FormGroup;
   images: LocalFile[] = [];
+  news : any = [];
 
   url: any;
   securepath: any = window;
@@ -38,7 +40,7 @@ export class AgregarPage implements OnInit {
 		private toastCtrl: ToastController,
      private imagepicker: ImagePicker, public actionSheetController: ActionSheetController) {
       this.formularioRegistro = this.fb.group({
-        'titulo': new FormControl("", Validators.required),
+        'title': new FormControl("", Validators.required),
         'descripcion': new FormControl("", Validators.required),
         'detalles': new FormControl("", Validators.required),
         'imagen': new FormControl("", Validators.required),
@@ -47,6 +49,11 @@ export class AgregarPage implements OnInit {
 
   ngOnInit() {
     this.loadFiles();
+	this.getNews().subscribe(res=>{
+		this.news = res;
+		
+	 
+	  })
   }
 
   onFileChange(fileChangeEvent:any) {
@@ -54,11 +61,54 @@ export class AgregarPage implements OnInit {
   }
   async submitForm() {
     let formData = new FormData();
-    formData.append("photo", this.file, this.file.name);
-    this.http.post("http://localhost:3000/upload", formData).subscribe((response) => {
+	var f = this.formularioRegistro.value;
+	formData.append("photo", this.file, this.file.name);
+
+    var noticia = {
+      id: 6,
+	  title: f.title,
+	  description :f.descripcion,
+	  details: f.detalles,
+	  image: "reina.jpg",
+	  type: 1,
+	  state: 1,
+	  createdAt: "01022023",
+	  changedAt: "02022023"
+    }
+	//var j= JSON.stringify(noticia)
+
+	
+	// var n= JSON.stringify(noticia)
+//	this.news.add(j)
+	console.log(this.news)
+	console.log(noticia)
+	this.news.push(noticia)
+	console.log(this.news)
+	var n= JSON.stringify(this.news)
+	console.log(n)
+	//this.news.push(noticia)
+	//console.log(this.news)
+    //localStorage.setItem('usuario',JSON.stringify(usuario));
+	this.http.post("assets/models/new_t.json", this.news).subscribe((response) => {
+		console.log(response);
+	  });
+   /* this.http.post("http://localhost:3000/upload", formData).subscribe((response) => {
       console.log(response);
-    });
+    });*/
   }
+
+  getNews(){
+    return this.http
+      .get("assets/models/new_t.json")
+      .pipe(
+        map((res:any) => {
+          return res.data;
+        })
+      )
+    }
+    async Eliminar(){
+      console.log("se va a eliminar")
+    }
   async loadFiles() {
 		this.images = [];
 

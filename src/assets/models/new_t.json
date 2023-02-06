@@ -1,9 +1,20 @@
 {
     "data": [
         {
+            "id" : 10,
+            "title": "aa",
+            "description" :"aa",
+            "details": "aa",
+            "image": "reina.jpg",
+            "type" : 1,
+            "state": 1,
+            "createdAt": "01022023",
+            "changedAt": "02022023"
+        },
+        {
             "id" : 1,
-            "title": "Noticia1",
-            "description" :" Aqui se descripe la noticia 1",
+            "title": "Noticia 1 Nacionales",
+            "description" :" Aqui se descripe la noticia 1 de las nacionales",
             "details": "Detalles de la Noticia 1 Detalles de la Noticia 1 Detalles de la Noticia 1 Detalles de la Noticia 1",
             "image": "5.jpg",
             "type" : 1,
