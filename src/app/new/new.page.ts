@@ -4,37 +4,41 @@ import {map} from 'rxjs/operators'
 import {IonSlides} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {ActivatedRoute, Params} from '@angular/router';
+import {FirestoreService} from '../services/firestore.service';
+import {Noticia} from '../models';
 @Component({
   selector: 'app-new',
   templateUrl: './new.page.html',
   styleUrls: ['./new.page.scss'],
 })
 export class NewPage implements OnInit {
-  news : any = [];
+  news : Noticia[] = [];
   id: any;
-  new_u: any ={};
+  new_u: any;
   type_title : any;
 
   constructor(private http: HttpClient,
-    private router: Router ,private route: ActivatedRoute) { }
+    private router: Router ,private route: ActivatedRoute,
+    private firestore: FirestoreService) { }
 
   ngOnInit() {
     this.id= this.route.snapshot.paramMap.get("id")
-    console.log(this.id)
-    this.getNews().subscribe(res=>{
-     console.log(res)
-   
-      this.news = res;
-      for(let i =0; i< this.news.length; i++){
-        if(this.news[i].id== this.id){
-          this.new_u= this.news[i];
-        }
-      }
-      console.log(this.new_u)
-      this.type_title = this.getType(this.new_u.type);
-    });
+    this.getNoticia(this.id)
   }
 
+ async getNoticia(id: any){
+    this.new_u = this.firestore.getDoc('Noticias',id);
+   await this.firestore.getCollection1<Noticia>('Noticias').subscribe( res => {
+      for(let i= 0; i< res.length; i++){
+        if(res[i].id==id){
+        
+          this.new_u=(res[i])
+          this.type_title = this.getType(this.new_u.type);
+        }
+      }
+    })
+   
+  }
   getNews(){
     return this.http
       .get("assets/models/new_t.json")

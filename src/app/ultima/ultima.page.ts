@@ -4,6 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators'
 import {IonSlides} from '@ionic/angular';
 import {Router} from '@angular/router';
+import {FirestoreService} from '../services/firestore.service';
+import {Noticia} from '../models';
 @Component({
   selector: 'app-ultima',
   templateUrl: './ultima.page.html',
@@ -21,19 +23,17 @@ export class UltimaPage implements OnInit {
     autoplayDisableOnInteraction: false
   }
 
-  news : any = [];
+  news : Noticia[] = [];
 
   constructor(
     private http: HttpClient,
-    private router: Router
+    private router: Router,
+    private firestore: FirestoreService
   ) { }
 
   ngOnInit() {
   
-    this.getNews().subscribe(res=>{
-     
-      this.news = res;
-    });
+  this.getNoticias();
   }
 
   getNews(){
@@ -46,6 +46,12 @@ export class UltimaPage implements OnInit {
         )
   }
 
+  getNoticias(){
+    this.firestore.getCollection1<Noticia>('Ultima').subscribe( res => {
+      this.news= res;
+    })
+    
+  }
   goToRoute(val: any){
     console.log(val)
     if(val.type==1){

@@ -5,6 +5,8 @@ import { ActionSheetController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController, Platform, ToastController } from '@ionic/angular';
 import { Filesystem, Directory } from '@capacitor/filesystem';
+import {FirestoreService} from '../services/firestore.service';
+import {Noticia} from '../models';
 import {
   FormGroup,
   FormControl,
@@ -26,10 +28,13 @@ interface LocalFile {
 })
 export class AgregarPage implements OnInit {
   formularioRegistro: FormGroup;
-  images: LocalFile[] = [];
   news : any = [];
-
+  imagen_direccion: any;
   url: any;
+  tipo: any;
+  newImage ='';
+  newFile= '';
+  old_id: any;
   securepath: any = window;
   private file:any= File;
   constructor(
@@ -38,63 +43,92 @@ export class AgregarPage implements OnInit {
 		private http: HttpClient,
 		private loadingCtrl: LoadingController,
 		private toastCtrl: ToastController,
+		private firestore: FirestoreService,
      private imagepicker: ImagePicker, public actionSheetController: ActionSheetController) {
       this.formularioRegistro = this.fb.group({
         'title': new FormControl("", Validators.required),
         'descripcion': new FormControl("", Validators.required),
         'detalles': new FormControl("", Validators.required),
-        'imagen': new FormControl("", Validators.required),
+        'imagen': new FormControl("", Validators.required)
       });
       }
 
+
   ngOnInit() {
-    this.loadFiles();
-	this.getNews().subscribe(res=>{
-		this.news = res;
-		
-	 
-	  })
+    this.getNoticias()
+	
   }
 
-  onFileChange(fileChangeEvent:any) {
-    this.file = fileChangeEvent.target.files[0];
-  }
+ 
   async submitForm() {
-    let formData = new FormData();
+  
 	var f = this.formularioRegistro.value;
-	formData.append("photo", this.file, this.file.name);
+	console.log(f)
+	const path = 'Noticias'
+	const name=  f.title;
 
+	const res = await this.firestore.uploadImage(this.newFile,path,name);
+	this.imagen_direccion= res;
+	console.log(this.imagen_direccion)
+	
     var noticia = {
-      id: 6,
+		id: this.firestore.getId(),
 	  title: f.title,
 	  description :f.descripcion,
 	  details: f.detalles,
-	  image: "reina.jpg",
-	  type: 1,
-	  state: 1,
-	  createdAt: "01022023",
-	  changedAt: "02022023"
+	  image: this.imagen_direccion,
+	  type: this.tipo,
+	  fecha: new Date()
     }
-	//var j= JSON.stringify(noticia)
+    
+    for(let i =0; i< this.news.length;i++){
+     if(this.news[i].type== this.tipo){
+      await this.firestore.deleteDoc('Ultima',this.news[i].id);
+     }
+    }
+	await this.firestore.createDoc(noticia, 'Noticias/',noticia.id);
 
+
+	await this.firestore.createDoc(noticia, 'Ultima',noticia.id);
+  
+  //
+ 
 	
-	// var n= JSON.stringify(noticia)
-//	this.news.add(j)
-	console.log(this.news)
-	console.log(noticia)
-	this.news.push(noticia)
-	console.log(this.news)
-	var n= JSON.stringify(this.news)
-	console.log(n)
-	//this.news.push(noticia)
-	//console.log(this.news)
-    //localStorage.setItem('usuario',JSON.stringify(usuario));
-	this.http.post("assets/models/new_t.json", this.news).subscribe((response) => {
-		console.log(response);
-	  });
-   /* this.http.post("http://localhost:3000/upload", formData).subscribe((response) => {
-      console.log(response);
-    });*/
+  }
+  async DELT(tipo: any){
+    await this.firestore.getCollection1<Noticia>('Ultima').subscribe( rest => {
+      for(let i= 0; i< rest.length; i++){
+        if(rest[i].type==tipo){
+         
+         this.old_id= rest[i].id;
+         console.log("VAMOS A ELIMINAR EL ID " + this.old_id)
+        }
+      }
+    })
+  }
+  
+
+ async  getNoticias(){
+
+    this.firestore.getCollection1<Noticia>('Ultima').subscribe( res => {
+      for(let i= 0; i< res.length; i++){
+        this.news = res
+        
+      }
+    })
+    
+  }
+
+  async newImageU(event:any){
+	if(event.target.files && event.target.files[0]){
+		this.newFile= event.target.files[0];
+		const reader = new FileReader();
+		reader.onload =((image) => {
+			this.newImage= image.target.result as string;
+		
+		});
+		reader.readAsDataURL(event.target.files[0]);
+	}
   }
 
   getNews(){
@@ -109,49 +143,8 @@ export class AgregarPage implements OnInit {
     async Eliminar(){
       console.log("se va a eliminar")
     }
-  async loadFiles() {
-		this.images = [];
-
-		const loading = await this.loadingCtrl.create({
-			message: 'Loading data...'
-		});
-		await loading.present();
-
-		Filesystem.readdir({
-			path: IMAGE_DIR,
-			directory: Directory.Data
-		})
-			.then(
-				(result) => {
-					this.loadFileData(result.files);
-				},
-				async (err) => {
-					// Folder does not yet exists!
-					await Filesystem.mkdir({
-						path: IMAGE_DIR,
-						directory: Directory.Data
-					});
-				}
-			)
-			.then((_) => {
-				loading.dismiss();
-			});
-	}
-
-  async loadFileData(fileNames: any[]) {
-		for (let f of fileNames) {
-			const filePath = `${IMAGE_DIR}/${f}`;
-
-			const readFile = await Filesystem.readFile({
-				path: filePath,
-				directory: Directory.Data
-			});
-
-			this.images.push({
-				name: f,
-				path: filePath,
-				data: `data:image/jpeg;base64,${readFile.data}`
-			});
-		}
-	}
-}
+	async handleChange(e:any){
+		this.tipo= e.detail.value
+  
+	  }
+ }

@@ -28,7 +28,8 @@
         </ion-item>
         
         <ion-item >
-          <ion-select placeholder="Categoría" mode="md" color="--ion-item-background">
+          <ion-select  placeholder="Categoría" mode="md" color="--ion-item-background"
+          (ionChange)="handleChange($event)">
             <ion-select-option value="1" style="background-color: cornsilk" >Nacionales</ion-select-option>
             <ion-select-option value="2">Internacionales</ion-select-option>
             <ion-select-option value="3">Deportes</ion-select-option>
@@ -37,7 +38,7 @@
           </ion-select>
         </ion-item>
         <ion-item>
-       <ion-input  icon-left large type="file" (change)="onFileChange($event)" formControlName="imagen"><ion-icon name ="images"></ion-icon></ion-input>
+       <ion-input  icon-left large type="file" (change)="newImageU($event)" formControlName="imagen"><ion-icon name ="images"></ion-icon></ion-input>
 
         </ion-item>
         <br>
@@ -45,6 +46,10 @@
         </ion-button>
         
       </form>
+      
+        <img [src]="newImage" />
+   
+    
     </ion-card-content>
   </ion-card>
 

@@ -9,4 +9,29 @@
 
 <ion-content>
 
+  <ion-row>
+    <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor ="let new of news">
+      <ion-card class="card1" [routerLink]="['/new',new.id]">
+        <ion-grid>
+          <ion-row>
+            <ion-col class="card1-title">{{new.title}}</ion-col>
+            
+          </ion-row>
+            <ion-row>
+               <ion-col class="card1-text">{{new.description}}</ion-col>
+            
+               
+            </ion-row>
+            <ion-row>
+              <ion-col> <img [src]="new.image" /></ion-col>
+            </ion-row>
+        </ion-grid>
+      
+      </ion-card>
+      <ion-button (click)="Eliminar()" *ngIf ="ingresado"> X
+      </ion-button>
+      <ion-button (click)="Eliminar()" *ngIf ="ingresado"> Editar
+      </ion-button>
+    </ion-col>
+  </ion-row>
 </ion-content>

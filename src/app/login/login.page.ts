@@ -6,6 +6,7 @@ import {
   FormBuilder
 } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
+import {FirestoreService} from '../services/firestore.service'
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -14,7 +15,8 @@ import { AlertController, NavController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   formularioLogin: FormGroup;
   constructor(public fb: FormBuilder, public alertController: AlertController,
-    public navCtrl: NavController) {
+    public navCtrl: NavController,
+    private firestore: FirestoreService) {
     this.formularioLogin = this.fb.group({
       'correo': new FormControl("",Validators.required),
       'password': new FormControl("",Validators.required)
@@ -40,5 +42,8 @@ export class LoginPage implements OnInit {
   
       await alert.present();
     }
+  }
+  getUsuarios(){
+    this.firestore.getCollection()
   }
 }

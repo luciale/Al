@@ -26,6 +26,6 @@ export class AppComponent {
     { title: 'Registro', url: '/registro', icon: 'person-add' },
     { title: 'Login', url: '/login', icon: 'log-in'}
   ];
-  public labels = [];
+
   constructor() {}
 }

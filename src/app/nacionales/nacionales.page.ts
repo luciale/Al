@@ -1,44 +1,42 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators'
+import {map} from 'rxjs/operators';
+import {FirestoreService} from '../services/firestore.service';
+import {Noticia} from '../models';
 @Component({
   selector: 'app-nacionales',
   templateUrl: './nacionales.page.html',
   styleUrls: ['./nacionales.page.scss'],
 })
 export class NacionalesPage implements OnInit {
-  news : any = [];
+  news : Noticia[] = [];
   news_t: any = [];
   id: any;
   new_u: any ={};
   type_title : any;
   ingresado= false;
   constructor(private http: HttpClient,
-    private router: Router ) { }
+    private router: Router ,
+    private firestore: FirestoreService) { }
 
   ngOnInit() {
-    console.log(this.ingresado)
-    this.ingresado= JSON.parse(localStorage.getItem('ingresado') as string);
-    console.log(this.ingresado)
-    if(this.ingresado== null){
-      this.ingresado= false;
-    }
-    console.log(this.ingresado)
-    this.getNews().subscribe(res=>{
+   this.getNoticias()
     
-      for(let i =0; i< res.length; i++){
-        if(res[i].type==1){
-       
-          this.news.push(res[i]);
-        }
-      }
-      
+ 
    
-    })
-    console.log(this.news);
   }
 
+  getNoticias(){
+    this.firestore.getCollection1<Noticia>('Noticias').subscribe( res => {
+      for(let i= 0; i< res.length; i++){
+        if(res[i].type== "1"){
+          this.news.push(res[i])
+        }
+      }
+    })
+    
+  }
   getNews(){
     return this.http
       .get("assets/models/new_t.json")

@@ -11,7 +11,7 @@
   <ion-slides   #slider loop="true" pager="true" [options]=" slideOptions"  >
     <ion-slide  *ngFor ="let new of news">
       <ion-card (click) = "goToRoute(new)">
-        <img src="assets/images/{{new.image}}" />
+        <img [src]="new.image" />
         <div class= "card-title">{{new.title}} </div>
       </ion-card>
 
@@ -31,7 +31,7 @@
           </ion-row>
             <ion-row>
                <ion-col class="card1-text">{{new.description}}</ion-col>
-               <ion-col> <img src="assets/images/{{new.image}}" /></ion-col>
+               <ion-col> <img [src]="new.image" /></ion-col>
         
             </ion-row>
         </ion-grid>
