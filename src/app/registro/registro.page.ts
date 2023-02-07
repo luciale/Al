@@ -5,7 +5,10 @@ import {
   Validators,
   FormBuilder
 } from '@angular/forms';
+import {FirebaseauthService} from '../services/firebaseauth.service'
 import { AlertController } from '@ionic/angular';
+import { FileTransferObject } from '@awesome-cordova-plugins/file-transfer/ngx';
+import { timeStamp } from 'console';
 @Component({
   selector: 'app-registro',
   templateUrl: './registro.page.html',
@@ -14,16 +17,16 @@ import { AlertController } from '@ionic/angular';
 export class RegistroPage implements OnInit {
   formularioRegistro: FormGroup;
 
-  constructor(public fb: FormBuilder,  public alertController: AlertController) { 
+  constructor(public fb: FormBuilder,  public alertController: AlertController ,public firebaseauthService: FirebaseauthService) { 
     this.formularioRegistro = this.fb.group({
       'correo': new FormControl("", Validators.required),
-      'password': new FormControl("", Validators.required),
-      'confirmacionPassword': new FormControl("", Validators.required)
+      'password': new FormControl("", Validators.required)
     });
   }
 
-  ngOnInit() {
-  
+  async ngOnInit() {
+    const uid= await this.firebaseauthService.getUid();
+    console.log(uid)
   }
 
   async guardar(){
@@ -42,10 +45,17 @@ export class RegistroPage implements OnInit {
     }
 
     var usuario = {
-      nombre: f.nombre,
+      email: f.correo,
       password: f.password
     }
  
-    localStorage.setItem('usuario',JSON.stringify(usuario));
+    const res= await this.firebaseauthService.registrar(usuario.email,usuario.password)
+    const r = await this.firebaseauthService.getUid();
+    console.log(r)
+
   }
+  async salir(){
+    this.firebaseauthService.logut();
+  }
+  
 }

@@ -24,7 +24,7 @@
         </ion-item>
       </form>
       <br>
-      <ion-button (click)="getUsuarios()">
+      <ion-button (click)="ingresar()">
         Ingresar
       </ion-button>
     </ion-card-content>
@@ -36,5 +36,7 @@
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/registro']">Registrarse</ion-button>
     </ion-buttons>
+    <ion-button (click)="salir()">Cerrar Sesión
+    </ion-button>
   </ion-toolbar>
 </ion-footer>

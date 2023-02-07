@@ -7,6 +7,7 @@ import { LoadingController, Platform, ToastController } from '@ionic/angular';
 import { Filesystem, Directory } from '@capacitor/filesystem';
 import {FirestoreService} from '../services/firestore.service';
 import {Noticia} from '../models';
+import {FirebaseauthService} from '../services/firebaseauth.service'
 import {
   FormGroup,
   FormControl,
@@ -37,14 +38,16 @@ export class AgregarPage implements OnInit {
   old_id: any;
   securepath: any = window;
   private file:any= File;
+  loading: any;
+  toast: any;
   constructor(
     public fb: FormBuilder,
     private plt: Platform,
 		private http: HttpClient,
-		private loadingCtrl: LoadingController,
-		private toastCtrl: ToastController,
+		private toastController: ToastController,
 		private firestore: FirestoreService,
-     private imagepicker: ImagePicker, public actionSheetController: ActionSheetController) {
+    public loadingController: LoadingController,
+     private imagepicker: ImagePicker, public actionSheetController: ActionSheetController,public firebaseauthService: FirebaseauthService) {
       this.formularioRegistro = this.fb.group({
         'title': new FormControl("", Validators.required),
         'descripcion': new FormControl("", Validators.required),
@@ -59,17 +62,32 @@ export class AgregarPage implements OnInit {
 	
   }
 
- 
+ async Guardar(){
+  this.presentLoading()
+   this.submitForm().then( res =>{
+    this.loading.dismiss();
+    this.presentToast();
+    this.formularioRegistro = this.fb.group({
+      'title': new FormControl("", Validators.required),
+      'descripcion': new FormControl("", Validators.required),
+      'detalles': new FormControl("", Validators.required),
+      'imagen': new FormControl("", Validators.required)
+    });
+    this.newImage='';
+   }).catch(error =>{
+
+   })
+ }
   async submitForm() {
   
 	var f = this.formularioRegistro.value;
-	console.log(f)
+	
 	const path = 'Noticias'
 	const name=  f.title;
 
 	const res = await this.firestore.uploadImage(this.newFile,path,name);
 	this.imagen_direccion= res;
-	console.log(this.imagen_direccion)
+	
 	
     var noticia = {
 		id: this.firestore.getId(),
@@ -101,7 +119,7 @@ export class AgregarPage implements OnInit {
         if(rest[i].type==tipo){
          
          this.old_id= rest[i].id;
-         console.log("VAMOS A ELIMINAR EL ID " + this.old_id)
+   
         }
       }
     })
@@ -147,4 +165,22 @@ export class AgregarPage implements OnInit {
 		this.tipo= e.detail.value
   
 	  }
+    async presentLoading(){
+      this.loading = await this.loadingController.create({
+        message: 'Guardando Noticia...'
+      });
+      await this.loading.present();
+     
+    }
+
+    async presentToast(){
+      this.toast= await this.toastController.create({
+        message: 'Noticia agregada exitosamente',
+        duration:2000
+      });
+      this.toast.present();
+    }
+    async salir(){
+      this.firebaseauthService.logut();
+    }
  }

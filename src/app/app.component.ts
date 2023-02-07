@@ -1,12 +1,25 @@
 import { Component } from '@angular/core';
+import {FirebaseauthService} from '../app/services/firebaseauth.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-  ingresado= JSON.parse(localStorage.getItem('ingresado') as string);
-  
+  ingresado: boolean;
+  async ngOnInit() {
+    await this.firebaseauthService.stateAuth().subscribe(res =>{
+      console.log(res)
+      if(res!= null){
+        this.ingresado=true;
+        console.log(this.ingresado)
+      }else{
+        this.ingresado= false;
+        console.log(this.ingresado)
+      }
+    })
+   
+  }
   public appPages = [
     { title: 'Última Hora', url: '/ultima', icon: 'time' },
     { title: 'Nacionales', url: '/nacionales', icon: 'newspaper' },
@@ -27,5 +40,5 @@ export class AppComponent {
     { title: 'Login', url: '/login', icon: 'log-in'}
   ];
 
-  constructor() {}
+  constructor( public firebaseauthService: FirebaseauthService) {}
 }

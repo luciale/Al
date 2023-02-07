@@ -4,24 +4,40 @@ import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {FirestoreService} from '../services/firestore.service';
 import {Noticia} from '../models';
+import { ToastController } from '@ionic/angular';
+import {FirebaseauthService} from '../services/firebaseauth.service';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-nacionales',
   templateUrl: './nacionales.page.html',
   styleUrls: ['./nacionales.page.scss'],
 })
 export class NacionalesPage implements OnInit {
-  news : Noticia[] = [];
+
   news_t: any = [];
   id: any;
   new_u: any ={};
   type_title : any;
-  ingresado= false;
+  news : Noticia[] = [];
+  ingresado: boolean;
+  toast: any;
   constructor(private http: HttpClient,
     private router: Router ,
-    private firestore: FirestoreService) { }
+    private firestore: FirestoreService,
+    private alertController: AlertController,private toastController: ToastController,public firebaseauthService: FirebaseauthService) { }
 
-  ngOnInit() {
-   this.getNoticias()
+  async ngOnInit() {
+    this.getNoticias()
+    await this.firebaseauthService.stateAuth().subscribe(res =>{
+      console.log(res)
+      if(res!= null){
+        this.ingresado=true;
+        console.log(this.ingresado)
+      }else{
+        this.ingresado= false;
+        console.log(this.ingresado)
+      }
+    })
     
  
    
@@ -46,7 +62,43 @@ export class NacionalesPage implements OnInit {
         })
       )
     }
-    async Eliminar(){
-      console.log("se va a eliminar")
+    async Eliminar(id:any){
+      const alert = await this.alertController.create({
+        header: 'Desea eliminar la noticia?',
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              this.alertController.dismiss();
+            },
+          },
+          {
+            text: 'Eliminar',
+            role: 'confirm',
+            handler: () => {
+             this.firestore.deleteDoc('Noticias/',id).then(res =>{
+              this.presentToast('Eliminado con éxito');
+              this.alertController.dismiss();
+             }).catch(error=>{
+              this.presentToast('No se pudo eliminar')
+             })
+             
+            },
+          },
+        ],
+      });
+  
+      await alert.present();
+  
+      
+  
+    }
+    async presentToast(mess:string){
+      this.toast= await this.toastController.create({
+        message: mess,
+        duration:2000
+      });
+      this.toast.present();
     }
 }

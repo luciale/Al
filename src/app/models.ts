@@ -8,4 +8,9 @@ export interface Noticia{
     fecha: Date
 
 }
+export interface Usuario{
+    uid: string,
+    email: string,
+    password: string
+}
 
