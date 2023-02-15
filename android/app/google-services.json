@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "915172380875",
+    "project_id": "alinstanteguate",
+    "storage_bucket": "alinstanteguate.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:915172380875:android:a41164121d920bcef64b4e",
+        "android_client_info": {
+          "package_name": "com.alinstantegt.alinstante"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "915172380875-0nl95nf7oqo6i6i1e24n1v2o5o7roqgl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQ7zaqP7CLp_SNr3bFeoVE2MXFao0AwF8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "915172380875-0nl95nf7oqo6i6i1e24n1v2o5o7roqgl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

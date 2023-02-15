@@ -36,12 +36,12 @@
     "@capacitor/keyboard": "4.1.0",
     "@capacitor/status-bar": "4.1.1",
     "@ionic/angular": "^6.1.9",
-    "cordova-plugin-advanced-http": "^3.3.1",
     "cordova-plugin-camera": "^6.0.0",
     "cordova-plugin-telerik-imagepicker": "^2.3.6",
     "firebase": "^9.17.1",
     "ionic-angular": "^3.9.10",
     "ionicons": "^6.0.3",
+    "jetifier": "^2.0.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.11.4"
