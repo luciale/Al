@@ -27,3 +27,10 @@
 ion-alert.alertCustomCss {
     --background: #01686d;
   }
+  .my-custom-class {
+    
+    --background: #01686d;
+    .my-custom-class{
+      direction: ltr;
+  }
+  }

@@ -2,9 +2,9 @@ ion-menu-button {
     color: var(--ion-color-secondary);
   }
   
-ion-content{
+  ion-content{
   background-color: #ffffff;
-}
+  }
   .iconlist {
     background-color: #ffffff;
   }
@@ -13,7 +13,7 @@ ion-content{
     background-color: #ffffff ;
     position: relative;
     text-align: center;
-
+  
    // border-radius: 15px;
   }
   
@@ -92,9 +92,9 @@ ion-content{
     border-radius: 0%;
    position: relative;
    align-self: center;
-
+  
   }
-
+  
   .row2{
     position:absolute
   }
@@ -106,8 +106,8 @@ ion-content{
     padding: 5%;
     
   }
-
- 
+  
+  
   .span1-text{
     color: var(--ion-color-primary);
     font-weight: 500px ;
@@ -115,7 +115,7 @@ ion-content{
     margin-bottom: 8px;
   }
   .close {position:relative;}
-
+  
   .close .closeButton1 {
     font-size: 24px;
     width:19px;height:19px;
@@ -127,11 +127,10 @@ ion-content{
     color:#000000;
     background-color: black;
   
-}
-
-.img2 {
-  
-  height: 20%;
-  width: 100%;
-  opacity: 0.7;
-}
+  }
+  .img2 {
+    
+    height: 20%;
+    width: 100%;
+    opacity: 0.7;
+  }

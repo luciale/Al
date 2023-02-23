@@ -40,13 +40,7 @@ export class LoginPage implements OnInit {
     if(this.uid!= null){
 
     }else{
-      const alert = await this.alertController.create({
-        header: 'Datos incorrectos',
-        message: 'Los datos que ingresaste son incorrectos.',
-        buttons: ['Aceptar']
-      });
-  
-      await alert.present();
+     
     }
 
 

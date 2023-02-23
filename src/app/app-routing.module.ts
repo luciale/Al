@@ -48,10 +48,27 @@ const routes: Routes = [
   {
     path: 'login',
     loadChildren: () => import('./login/login.module').then( m => m.LoginPageModule)
-  },  {
+  },
+  {
     path: 'agregar',
     loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
+  },
+  {
+    path: 'publicidad',
+    loadChildren: () => import('./publicidad/publicidad.module').then( m => m.PublicidadPageModule)
+  },  {
+    path: 'baners',
+    loadChildren: () => import('./baners/baners.module').then( m => m.BanersPageModule)
+  },
+  {
+    path: 'perfil',
+    loadChildren: () => import('./perfil/perfil.module').then( m => m.PerfilPageModule)
+  },
+  {
+    path: 'cupones',
+    loadChildren: () => import('./cupones/cupones.module').then( m => m.CuponesPageModule)
   }
+
 
 ];
 

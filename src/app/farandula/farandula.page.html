@@ -7,8 +7,8 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content *ngIf="!vista">
+  <img img class="img2" [src]="this.ban.image"  *ngIf="vista1" />
   <ion-row>
     <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor ="let new of news">
       <ion-card class="card1" [routerLink]="['/new',new.id]">
@@ -32,4 +32,14 @@
       </ion-button>
     </ion-col>
   </ion-row>
+</ion-content>
+
+
+<ion-content *ngIf="vista">
+
+  <span  (click)="close()" class="span1-text" >&#x26D2;</span>
+  <img img class="img1" [src]="this.pub.image" />
+
+
+
 </ion-content>

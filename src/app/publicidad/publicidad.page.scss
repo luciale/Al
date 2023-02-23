@@ -5,7 +5,7 @@ ion-menu-button {
 ion-content{
   background-color: #ffffff;
 }
-  .iconlist {
+.iconlist {
     background-color: #ffffff;
   }
   
@@ -87,51 +87,28 @@ ion-content{
     text-align: center;
     
   }
-  .card2 {
+  .select{
     opacity: 0.90;
+    background-color: rgba( 71,146,149,0.3);
     border-radius: 0%;
    position: relative;
-   align-self: center;
-
-  }
-
-  .row2{
-    position:absolute
+    text-align: center;
   }
   
-  .img1 {
   
-    height: 95%;
-    width: 95%;
-    padding: 5%;
-    
+  .alertCustomCss .alert-wrapper {
+    background: #01686d!important;
   }
 
- 
-  .span1-text{
-    color: var(--ion-color-primary);
-    font-weight: 500px ;
-    margin-top: 8px;
-    margin-bottom: 8px;
+  ion-select {
+    --placeholder-color: #971e49;
+    --placeholder-opacity: 1;
+    width: 100%;
+    justify-content: center;
   }
-  .close {position:relative;}
-
-  .close .closeButton1 {
-    font-size: 24px;
-    width:19px;height:19px;
-    top:-9px;
-    right:-9px;
-    position:absolute;
-    cursor:pointer;
-    line-height:21px;
-    color:#000000;
-    background-color: black;
-  
-}
-
-.img2 {
-  
-  height: 20%;
-  width: 100%;
-  opacity: 0.7;
-}
+  ion-select-option{
+    --placeholder-color: #971e49;
+    --placeholder-opacity: 1;
+    width: 100%;
+    justify-content: center;
+  }

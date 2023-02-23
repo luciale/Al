@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ImagePicker, ImagePickerOptions } from '@awesome-cordova-plugins/image-picker/ngx';
-import { ActionSheetController } from '@ionic/angular';
+import { ActionSheetController, AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController, Platform, ToastController } from '@ionic/angular';
 import { Filesystem, Directory } from '@capacitor/filesystem';
@@ -40,11 +40,14 @@ export class AgregarPage implements OnInit {
   private file:any= File;
   loading: any;
   toast: any;
+  color: string = '#d435a2';
+  categoria: string = 'Categoria';
   constructor(
     public fb: FormBuilder,
     private plt: Platform,
 		private http: HttpClient,
 		private toastController: ToastController,
+    private alertController: AlertController,
 		private firestore: FirestoreService,
     public loadingController: LoadingController,
      private imagepicker: ImagePicker, public actionSheetController: ActionSheetController,public firebaseauthService: FirebaseauthService) {
@@ -59,8 +62,97 @@ export class AgregarPage implements OnInit {
 
   ngOnInit() {
     this.getNoticias()
+    this.categoria= 'Categoria'
 	
   }
+  async presentAlertRadio() {
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: 'Radio',
+      inputs: [
+        {
+          name: 'Nacionales',
+          type: 'radio',
+          label: 'Nacionales',
+          value: '1',
+          handler: () => {
+           this.categoria= 'Nacionales'
+           this.tipo= '1'
+          },
+        },
+        {
+          name: 'Internacionales',
+          type: 'radio',
+          label: 'Internacionales',
+          value: '2',
+          handler: () => {
+            this.categoria= 'Internacionales',
+            this.tipo= '2'
+          },
+        },
+        {
+          name: 'Deportes',
+          type: 'radio',
+          label: 'Deportes',
+          value: '3',
+          handler: () => {
+            this.categoria= 'Deportes',
+            this.tipo= '3'
+          },
+        },
+        {
+          name: 'Farandula',
+          type: 'radio',
+          label: 'Farándula y Espectaculo',
+          value: '4',
+          handler: () => {
+            this.categoria= 'Farándula y Espectaculo',
+            this.tipo= '4'
+          },
+        },
+        {
+          name: 'Tendencias',
+          type: 'radio',
+          label: 'Tendencias',
+          value: '5',
+          handler: () => {
+            this.categoria= 'Tendencias'
+            this.tipo= '5'
+          },
+        },
+        {
+          name: 'Cupones',
+          type: 'radio',
+          label: 'Cupones',
+          value: '6',
+          handler: () => {
+            this.categoria= 'Cupones'
+            this.tipo= '6'
+          },
+        },
+      ],
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            this.categoria= 'Categoria'
+          },
+        },
+        {
+          text: 'Ok',
+          handler: data => {
+            this.tipo= data
+      
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+  }
+
+
 
  async Guardar(){
   this.presentLoading()
@@ -100,14 +192,17 @@ export class AgregarPage implements OnInit {
     }
     
     for(let i =0; i< this.news.length;i++){
-     if(this.news[i].type== this.tipo){
+     if(this.news[i].type== this.tipo && this.tipo!=6){
       await this.firestore.deleteDoc('Ultima',this.news[i].id);
      }
     }
 	await this.firestore.createDoc(noticia, 'Noticias/',noticia.id);
 
+  if(this.tipo!=6){
+    await this.firestore.createDoc(noticia, 'Ultima',noticia.id);
+  }
 
-	await this.firestore.createDoc(noticia, 'Ultima',noticia.id);
+
   
   //
  

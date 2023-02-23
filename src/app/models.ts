@@ -11,6 +11,13 @@ export interface Noticia{
 export interface Usuario{
     uid: string,
     email: string,
-    password: string
+    type: string
+}
+
+export interface Publicidad{
+    id: string,
+    image: string,
+    type: string,
+    fecha: Date
 }
 

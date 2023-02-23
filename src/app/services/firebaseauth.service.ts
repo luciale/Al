@@ -1,19 +1,32 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
+import {FirestoreService} from '../services/firestore.service';
+import {Router} from '@angular/router';
+import { AlertController } from '@ionic/angular';
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseauthService {
-
-  constructor(public auth: AngularFireAuth) { }
+public creado: any;
+  constructor(public auth: AngularFireAuth,
+    private firestore: FirestoreService,
+    private router: Router,
+    ) { }
   login(email: string, password: string){
     this.auth.signInWithEmailAndPassword(email,password)
   }
   logut(){
     this.auth.signOut()
   }
-  registrar(email: string, password: string){
-    this.auth.createUserWithEmailAndPassword(email,password)
+  async registrar(email: string, password: string, usuario: any){
+    this.auth.createUserWithEmailAndPassword(email,password).then((res)=>{
+      
+      this.firestore.createDoc(usuario, 'Usuario/',usuario.id);
+      this.router.navigate(['/ultima'])
+    }).catch((error)=>{
+      this.creado=0;
+      
+    })
   }
   async getUid(){
     const user = await this.auth.currentUser;
@@ -25,5 +38,14 @@ export class FirebaseauthService {
   }
   stateAuth(){
     return this.auth.authState;
+  }
+
+  async getEmail(){
+    const user = await this.auth.currentUser;
+    if(user=== null){
+      return null;
+    }else{
+      return user.email;
+    }
   }
 }

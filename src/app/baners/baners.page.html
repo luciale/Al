@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Baners</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card>
+  <ion-card-header>
+    <ion-card-title class ="card-title">Registro de Baner</ion-card-title>
+  </ion-card-header>
+  <ion-card-content>
+    <form [formGroup]="formularioRegistro" (keyup.enter)="submitForm()">
+   
+        <ion-item >
+          <ion-button (click)="presentAlertRadio()"> {{this.categoria}}
+          </ion-button>
+        
+        </ion-item>
+        <ion-item>
+        <ion-input  icon-left large type="file" (change)="newImageU($event)" formControlName="imagen"><ion-icon name ="images"></ion-icon></ion-input>
+ 
+         </ion-item>
+         
+         <br>
+        <ion-button (click)="Guardar()">Guardar
+        </ion-button>
+    </form>
+     
+    <img [src]="newImage" />
+   
+  
+  </ion-card-content>
+</ion-card>
+
+<ion-row>
+  <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor ="let new of news">
+    <ion-card class="card1" >
+      <ion-grid>
+          <ion-row>
+            <ion-col> <img [src]="new.image" /></ion-col>
+          </ion-row>
+      </ion-grid>
+    
+    </ion-card>
+    <ion-button (click)="Eliminar(new.id)" *ngIf ="ingresado"> X
+    </ion-button>
+  </ion-col>
+</ion-row>
+</ion-content>
+

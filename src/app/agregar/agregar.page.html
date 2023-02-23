@@ -26,16 +26,11 @@
           <ion-label position="floating">Detalles</ion-label>
           <ion-input formControlName="detalles"></ion-input>
         </ion-item>
-        
+      
         <ion-item >
-          <ion-select  placeholder="Categoría" mode="md" color="--ion-item-background"
-          (ionChange)="handleChange($event)">
-            <ion-select-option value="1" style="background-color: cornsilk" >Nacionales</ion-select-option>
-            <ion-select-option value="2">Internacionales</ion-select-option>
-            <ion-select-option value="3">Deportes</ion-select-option>
-            <ion-select-option value="4">Farándula y Espectaculo</ion-select-option>
-            <ion-select-option value="5">Tendencias</ion-select-option>
-          </ion-select>
+          <ion-button (click)="presentAlertRadio()"> {{this.categoria}}
+          </ion-button>
+        
         </ion-item>
         <ion-item>
        <ion-input  icon-left large type="file" (change)="newImageU($event)" formControlName="imagen"><ion-icon name ="images"></ion-icon></ion-input>
@@ -51,8 +46,7 @@
    
     
     </ion-card-content>
-    <ion-button (click)="salir()">Cerrar Sesión
-    </ion-button>
+    
   </ion-card>
 
 

@@ -13,7 +13,15 @@
       <ion-card-title class ="card-title">Registro</ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <form [formGroup]="formularioRegistro" (keyup.enter)="guardar()">
+      <form [formGroup]="formularioRegistro" (keyup.enter)="submitForm()">
+        <ion-item>
+          <ion-label position="floating">Nombre Completo </ion-label>
+          <ion-input formControlName="nombre" type="text"></ion-input>
+        </ion-item>
+        <ion-item >
+          <ion-button (click)="presentAlertRadio()"> Género
+          </ion-button>
+        </ion-item>
         <ion-item>
           <ion-label position="floating">Correo</ion-label>
           <ion-input formControlName="correo" type="email"></ion-input>
@@ -28,6 +36,4 @@
       </form>
     </ion-card-content>
   </ion-card>
-  <ion-button (click)="salir()">Cerrar Sesión
-  </ion-button>
 </ion-content>
