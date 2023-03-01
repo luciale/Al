@@ -122,6 +122,16 @@ export class PublicidadPage implements OnInit {
         header: 'Radio',
         inputs: [
           {
+            name: 'Portada',
+            type: 'radio',
+            label: 'Portada',
+            value: '1',
+            handler: () => {
+             this.categoria= 'Portada'
+             this.tipo= '7'
+            },
+          },
+          {
             name: 'Nacionales',
             type: 'radio',
             label: 'Nacionales',

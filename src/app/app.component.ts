@@ -39,7 +39,7 @@ export class AppComponent {
 
   public appPages = [
     { title: 'Perfil', url: '/perfil', icon: 'person' },
-    { title: 'Última Hora', url: '/ultima', icon: 'time' },
+    { title: 'Portada', url: '/ultima', icon: 'time' },
     { title: 'Nacionales', url: '/nacionales', icon: 'newspaper' },
     { title: 'Internacionales', url: '/internacionales', icon: 'globe' },
     { title: 'Deportes', url: '/deportes', icon: 'football' },
@@ -53,7 +53,7 @@ export class AppComponent {
   ];
   public appPages1 = [
     { title: 'Iniciar Sesión', url: '/login', icon: 'log-in'},
-    { title: 'Última Hora', url: '/ultima', icon: 'time' },
+    { title: 'Portada', url: '/ultima', icon: 'time' },
     { title: 'Nacionales', url: '/nacionales', icon: 'newspaper' },
     { title: 'Internacionales', url: '/internacionales', icon: 'globe' },
     { title: 'Deportes', url: '/deportes', icon: 'football' },

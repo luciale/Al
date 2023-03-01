@@ -4,6 +4,9 @@ export interface Noticia{
     description: string,
     details: string,
     image: string,
+    image1: string,
+    image2: string,
+    image3: string,
     type: string,
     fecha: Date
 

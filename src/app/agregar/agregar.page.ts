@@ -28,13 +28,23 @@ interface LocalFile {
   styleUrls: ['./agregar.page.scss'],
 })
 export class AgregarPage implements OnInit {
+  
   formularioRegistro: FormGroup;
   news : any = [];
   imagen_direccion: any;
+  imagen_direccion1: any;
+  imagen_direccion2: any;
+  imagen_direccion3: any;
   url: any;
   tipo: any;
   newImage ='';
+  newImage1 ='';
+  newImage2 ='';
+  newImage3 ='';
   newFile= '';
+  newFile1= '';
+  newFile2= '';
+  newFile3= '';
   old_id: any;
   securepath: any = window;
   private file:any= File;
@@ -42,7 +52,25 @@ export class AgregarPage implements OnInit {
   toast: any;
   color: string = '#d435a2';
   categoria: string = 'Categoria';
+  cant_imagenes= 0;
+  public modulesQuill = {
+    toolbar: [
+      ['bold', 'italic', 'underline', 'strike'],
+      [{ font:[]  as any[]}],
+      [{ color: []  as any[]}, 
+      { background: []  as any[]}],
+      [{ size: ['small', false, 'large', 'huge'] }],
+      [{ header: [1, 2, 3, 4, 5, 6, false] }],
+      [{ align: [] as any[] }],
+      ['blockquote', 'code-block'],
+      [{ list: 'ordered'}, { list: 'bullet' }],
+      ['link', 'image', 'video'],
+      ['clean'],
+    ]
+  };
+  public htmlContent: any;
   constructor(
+    
     public fb: FormBuilder,
     private plt: Platform,
 		private http: HttpClient,
@@ -57,6 +85,7 @@ export class AgregarPage implements OnInit {
         'detalles': new FormControl("", Validators.required),
         'imagen': new FormControl("", Validators.required)
       });
+      
       }
 
 
@@ -120,16 +149,6 @@ export class AgregarPage implements OnInit {
             this.tipo= '5'
           },
         },
-        {
-          name: 'Cupones',
-          type: 'radio',
-          label: 'Cupones',
-          value: '6',
-          handler: () => {
-            this.categoria= 'Cupones'
-            this.tipo= '6'
-          },
-        },
       ],
       buttons: [
         {
@@ -166,6 +185,9 @@ export class AgregarPage implements OnInit {
       'imagen': new FormControl("", Validators.required)
     });
     this.newImage='';
+    this.newImage1='';
+    this.newImage2='';
+    this.newImage3='';
    }).catch(error =>{
 
    })
@@ -179,7 +201,24 @@ export class AgregarPage implements OnInit {
 
 	const res = await this.firestore.uploadImage(this.newFile,path,name);
 	this.imagen_direccion= res;
+
+  if(this.newFile1!= ''){
+    const path = 'Noticias1'
+    const res = await this.firestore.uploadImage(this.newFile1,path,name);
+	this.imagen_direccion1= res;
+  }
+  if(this.newFile2!= ''){
+    const path = 'Noticias2'
+    const res = await this.firestore.uploadImage(this.newFile2,path,name);
+	this.imagen_direccion2= res;
+  }
 	
+  if(this.newFile3!= ''){
+    const path = 'Noticias3'
+    const res = await this.firestore.uploadImage(this.newFile1,path,name);
+	this.imagen_direccion3= res;
+  }
+  
 	
     var noticia = {
 		id: this.firestore.getId(),
@@ -188,7 +227,10 @@ export class AgregarPage implements OnInit {
 	  details: f.detalles,
 	  image: this.imagen_direccion,
 	  type: this.tipo,
-	  fecha: new Date()
+	  fecha: new Date(),
+    image1: this.imagen_direccion1,
+    image2: this.imagen_direccion2,
+    image3: this.imagen_direccion3
     }
     
     for(let i =0; i< this.news.length;i++){
@@ -244,6 +286,41 @@ export class AgregarPage implements OnInit {
 	}
   }
 
+  async newImageU1(event:any){
+    if(event.target.files && event.target.files[0]){
+      this.newFile1= event.target.files[0];
+      const reader = new FileReader();
+      reader.onload =((image) => {
+        this.newImage1= image.target.result as string;
+      
+      });
+      reader.readAsDataURL(event.target.files[0]);
+    }
+    }
+  
+    async newImageU2(event:any){
+      if(event.target.files && event.target.files[0]){
+        this.newFile2= event.target.files[0];
+        const reader = new FileReader();
+        reader.onload =((image) => {
+          this.newImage2= image.target.result as string;
+        
+        });
+        reader.readAsDataURL(event.target.files[0]);
+      }
+      }
+
+      async newImageU3(event:any){
+        if(event.target.files && event.target.files[0]){
+          this.newFile3= event.target.files[0];
+          const reader = new FileReader();
+          reader.onload =((image) => {
+            this.newImage3= image.target.result as string;
+          
+          });
+          reader.readAsDataURL(event.target.files[0]);
+        }
+        }
   getNews(){
     return this.http
       .get("assets/models/new_t.json")
@@ -277,5 +354,18 @@ export class AgregarPage implements OnInit {
     }
     async salir(){
       this.firebaseauthService.logut();
+    }
+
+    async agregarImagen(){
+      if(this.cant_imagenes< 4){
+        this.cant_imagenes = this.cant_imagenes +1; 
+        console.log(this.cant_imagenes)
+      }
+    
+    }
+    onChangedEditor(event: any): void {
+      if (event.html) {
+          this.htmlContent = event.html;
+        }
     }
  }
