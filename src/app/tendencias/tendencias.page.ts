@@ -46,6 +46,16 @@ export class TendenciasPage implements OnInit {
           this.news.push(res[i])
         }
       }
+      this.news.sort(function (a, b) {
+        if (a.fecha < b.fecha) {
+          return 1;
+        }
+        if (a.fecha > b.fecha) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
     })
     
   }

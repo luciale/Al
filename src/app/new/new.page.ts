@@ -16,6 +16,13 @@ export class NewPage implements OnInit {
   id: any;
   new_u: any;
   type_title : any;
+  list_imagenes: string[] = [];
+  slideOptions = {
+    initialSlide: 0,
+    slidesPerView: 1,
+    autoplay: true,
+    autoplayDisableOnInteraction: false
+  }
 
   constructor(private http: HttpClient,
     private router: Router ,private route: ActivatedRoute,
@@ -33,6 +40,26 @@ export class NewPage implements OnInit {
         if(res[i].id==id){
         
           this.new_u=(res[i])
+          this.list_imagenes.push(res[i].image)
+          if(res[i].image1===null){
+
+          }else{
+         
+            
+            this.list_imagenes.push(res[i].image1)
+            if(res[i].image2===null){
+          
+            }else{
+              this.list_imagenes.push(res[i].image2)
+              if(res[i].image2===null){}
+              else{
+                this.list_imagenes.push(res[i].image3)
+              }
+            }
+           
+          }
+         
+         
           this.type_title = this.getType(this.new_u.type);
         }
       }

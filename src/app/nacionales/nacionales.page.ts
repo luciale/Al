@@ -57,9 +57,22 @@ export class NacionalesPage implements OnInit {
       for(let i= 0; i< res.length; i++){
         if(res[i].type== "1"){
           this.news.push(res[i])
+   
         }
       }
-    })
+
+      this.news.sort(function (a, b) {
+        if (a.fecha < b.fecha) {
+          return 1;
+        }
+        if (a.fecha > b.fecha) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      })
+    }
+    )
     
   }
   getNews(){

@@ -6,6 +6,7 @@ import {IonSlides} from '@ionic/angular';
 import {Router} from '@angular/router';
 import {FirestoreService} from '../services/firestore.service';
 import {Noticia} from '../models';
+import {Publicidad} from '../models';
 @Component({
   selector: 'app-ultima',
   templateUrl: './ultima.page.html',
@@ -14,7 +15,12 @@ import {Noticia} from '../models';
 
 
 export class UltimaPage implements OnInit {
-
+  publicidad : Array<Publicidad>;
+  baners :  Array<Publicidad>;
+  pub: any = {};
+  ban: any= {}
+  vista= true;
+  vista1= true;
   slider: any;
   slideOptions = {
     initialSlide: 0,
@@ -34,6 +40,9 @@ export class UltimaPage implements OnInit {
   ngOnInit() {
   
   this.getNoticias();
+  this.getPublicidad()
+   
+  this.getBaners()
   }
 
   getNews(){
@@ -49,6 +58,18 @@ export class UltimaPage implements OnInit {
   getNoticias(){
     this.firestore.getCollection1<Noticia>('Ultima').subscribe( res => {
       this.news= res;
+      
+      this.news.sort(function (a, b) {
+        if (a.fecha < b.fecha) {
+          return 1;
+        }
+        if (a.fecha > b.fecha) {
+          return -1;
+        }
+        // a must be equal to b
+        return 0;
+      });
+    
     })
     
   }
@@ -71,6 +92,62 @@ export class UltimaPage implements OnInit {
       this.router.navigate(['/tendencias'])
     }
  
+  }
+  
+  getPublicidad(){
+    this.publicidad=[];
+    let v= 0;
+    this.firestore.getCollection1<Publicidad>('Publicidad').subscribe( res => {
+      for(let i= 0; i< res.length; i++){
+        if(res[i].type== "7"){
+        
+            // get the input value
+            this.publicidad.push(res[i]);
+          
+        
+        
+     
+        }
+      }
+      if(this.publicidad.length==0){
+        this.vista=false;
+      }
+      let v = this.getRandomInt(0,this.publicidad.length);
+      this.pub= this.publicidad[v];
+    })
+
+
+    
+  }
+  getBaners(){
+    this.baners=[];
+    let v= 0;
+    this.firestore.getCollection1<Publicidad>('Baner').subscribe( res => {
+      for(let i= 0; i< res.length; i++){
+        if(res[i].type== "7"){
+          this.baners.push(res[i])
+        }
+      }
+      if(this.baners.length==0){
+        this.vista1=false;
+      }
+     
+      let v = this.getRandomInt(0,this.publicidad.length);
+      this.ban= this.baners[v];
+  
+    })
+    
+  }
+  
+  getRandomInt(min:number, max:number) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+  }
+  async close(){
+    this.vista= false;
+    await this.getBaners();
+
   }
  
 }

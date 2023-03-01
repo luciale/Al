@@ -206,17 +206,24 @@ export class AgregarPage implements OnInit {
     const path = 'Noticias1'
     const res = await this.firestore.uploadImage(this.newFile1,path,name);
 	this.imagen_direccion1= res;
+  }else{
+    this.imagen_direccion1= null;
   }
   if(this.newFile2!= ''){
     const path = 'Noticias2'
     const res = await this.firestore.uploadImage(this.newFile2,path,name);
 	this.imagen_direccion2= res;
+  }else{
+    this.imagen_direccion2= null;
   }
 	
   if(this.newFile3!= ''){
     const path = 'Noticias3'
     const res = await this.firestore.uploadImage(this.newFile1,path,name);
 	this.imagen_direccion3= res;
+  }
+  else{
+    this.imagen_direccion3= null;
   }
   
 	
@@ -232,21 +239,20 @@ export class AgregarPage implements OnInit {
     image2: this.imagen_direccion2,
     image3: this.imagen_direccion3
     }
-    
-    for(let i =0; i< this.news.length;i++){
-     if(this.news[i].type== this.tipo && this.tipo!=6){
-      await this.firestore.deleteDoc('Ultima',this.news[i].id);
-     }
-    }
-	await this.firestore.createDoc(noticia, 'Noticias/',noticia.id);
-
-  if(this.tipo!=6){
-    await this.firestore.createDoc(noticia, 'Ultima',noticia.id);
-  }
+  console.log(noticia)
 
 
   
-  //
+  for(let i =0; i< this.news.length;i++){
+    if(this.news[i].type== this.tipo && this.tipo!=6){
+     await this.firestore.deleteDoc('Ultima',this.news[i].id);
+    }
+   }
+ await this.firestore.createDoc(noticia, 'Noticias/',noticia.id);
+
+ if(this.tipo!=6){
+   await this.firestore.createDoc(noticia, 'Ultima',noticia.id);
+ }
  
 	
   }

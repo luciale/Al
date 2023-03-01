@@ -19,13 +19,19 @@
           <ion-input formControlName="title"></ion-input>
         </ion-item>
         <ion-item>
+               
           <ion-label position="floating">Descripcion</ion-label>
           <ion-input formControlName="descripcion"  ></ion-input>
-        </ion-item>
+
+            </ion-item>
+      
         <ion-item>
-          <ion-label position="floating">Detalles</ion-label>
-          <ion-input formControlName="detalles"></ion-input>
-        </ion-item>
+               
+          <ion-textarea placeholder="Detalles" [autoGrow]="true"
+          formControlName="detalles" ></ion-textarea>
+    
+            </ion-item>
+  
       
         <ion-item >
           <ion-button (click)="presentAlertRadio()"> {{this.categoria}}
@@ -62,14 +68,14 @@
             Agregar Imagen +
           </ion-button>
         </ion-item>
+      
         <br>
         <ion-button (click)="Guardar()">Guardar
         </ion-button>
         
       </form>
       
-      
-   
+ 
     
     </ion-card-content>
     

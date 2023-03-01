@@ -26,6 +26,12 @@ export class PublicidadPage implements OnInit {
   tipo: any;
   news : Publicidad[] = [];
   ingresado: boolean;
+  publicidad : Array<Publicidad>;
+  baners :  Array<Publicidad>;
+  pub: any = {};
+  ban: any= {}
+  vista= true;
+  vista1= true;
   constructor(  public firebaseauthService: FirebaseauthService, private alertController: AlertController, public fb: FormBuilder,	private firestore: FirestoreService,    public loadingController: LoadingController,		private toastController: ToastController,) { 
     this.formularioRegistro = this.fb.group({
       'imagen': new FormControl("", Validators.required)
@@ -44,6 +50,9 @@ export class PublicidadPage implements OnInit {
       }
     })
     this.getNoticias()
+    this.getPublicidad()
+   
+    this.getBaners()
   }
   async newImageU(event:any){
     if(event.target.files && event.target.files[0]){
@@ -125,7 +134,7 @@ export class PublicidadPage implements OnInit {
             name: 'Portada',
             type: 'radio',
             label: 'Portada',
-            value: '1',
+            value: '7',
             handler: () => {
              this.categoria= 'Portada'
              this.tipo= '7'
@@ -255,4 +264,59 @@ export class PublicidadPage implements OnInit {
   
     }
     
+    getPublicidad(){
+      this.publicidad=[];
+      let v= 0;
+      this.firestore.getCollection1<Publicidad>('Publicidad').subscribe( res => {
+        for(let i= 0; i< res.length; i++){
+          if(res[i].type== "7"){
+          
+              // get the input value
+              this.publicidad.push(res[i]);
+            
+
+          
+       
+          }
+        }
+        if(this.publicidad.length==0){
+          this.vista=false;
+        }
+        let v = this.getRandomInt(0,this.publicidad.length);
+        this.pub= this.publicidad[v];
+      })
+
+
+      
+    }
+    getBaners(){
+      this.baners=[];
+      let v= 0;
+      this.firestore.getCollection1<Publicidad>('Baner').subscribe( res => {
+        for(let i= 0; i< res.length; i++){
+          if(res[i].type== "7"){
+            this.baners.push(res[i])
+          }
+        }
+        if(this.baners.length==0){
+          this.vista1=false;
+        }
+       
+        let v = this.getRandomInt(0,this.publicidad.length);
+        this.ban= this.baners[v];
+    
+      })
+      
+    }
+    
+    getRandomInt(min:number, max:number) {
+      min = Math.ceil(min);
+      max = Math.floor(max);
+      return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+    }
+    async close(){
+      this.vista= false;
+      await this.getBaners();
+
+    }
 }

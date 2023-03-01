@@ -126,7 +126,7 @@ export class BanersPage implements OnInit {
             name: 'Portada',
             type: 'radio',
             label: 'Portada',
-            value: '1',
+            value: '7',
             handler: () => {
              this.categoria= 'Portada'
              this.tipo= '7'

@@ -7,7 +7,11 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class ="iconlist">
+<ion-content class ="iconlist" *ngIf="!vista">
+  <ion-card class = "card2">
+    <img img class="img2" [src]="this.ban.image"  *ngIf="vista1" />
+  </ion-card>
+  
   <ion-slides   #slider loop="true" pager="true" [options]=" slideOptions"  >
     <ion-slide  *ngFor ="let new of news">
       <ion-card (click) = "goToRoute(new)">
@@ -41,5 +45,14 @@
 
     </ion-col>
   </ion-row>
+
+</ion-content>
+
+<ion-content *ngIf="vista">
+
+  <span  (click)="close()" class="span1-text" >&#x26D2;</span>
+  <img img class="img1" [src]="this.pub.image" />
+
+
 
 </ion-content>
