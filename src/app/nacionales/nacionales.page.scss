@@ -88,11 +88,12 @@ ion-content{
     
   }
   .card2 {
-    opacity: 0.90;
-    border-radius: 0%;
-   position: relative;
-   align-self: center;
 
+    height: 200px;
+    border-radius: 0px;
+    background-color: #ffffff;
+    border: 3 px black; 
+  
   }
 
   .row2{
@@ -128,10 +129,10 @@ ion-content{
     background-color: black;
   
 }
-
 .img2 {
-  
-  height: 110px;
-  width: 100%;
-  opacity: 0.7;
+  height: 95%;
+  width: 95%;
+  padding: 3%;
+
+opacity: 0.9;
 }

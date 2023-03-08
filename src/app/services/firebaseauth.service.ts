@@ -12,11 +12,19 @@ public creado: any;
     private firestore: FirestoreService,
     private router: Router,
     ) { }
-  login(email: string, password: string){
-    this.auth.signInWithEmailAndPassword(email,password)
+  async login(email: string, password: string){
+    this.auth.signInWithEmailAndPassword(email,password).then((res)=>{
+      this.router.navigate(['/ultima'])
+    }).catch((error)=>{
+      this.creado=0;
+    })
   }
   logut(){
-    this.auth.signOut()
+    this.auth.signOut().then((res)=>{
+      this.router.navigate(['/ultima'])
+    }).catch((error)=>{
+      this.creado=0;
+    })
   }
   async registrar(email: string, password: string, usuario: any){
     this.auth.createUserWithEmailAndPassword(email,password).then((res)=>{

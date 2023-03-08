@@ -8,8 +8,8 @@
 </ion-header>
 
 <ion-content class ="iconlist" *ngIf="!vista">
-  <ion-card class = "card2">
-    <img img class="img2" [src]="this.ban.image"  *ngIf="vista1" />
+  <ion-card class = "card2" *ngIf="vista1">
+    <img img class="img2" [src]="this.ban.image"   />
   </ion-card>
   
   <ion-slides   #slider loop="true" pager="true" [options]=" slideOptions"  >

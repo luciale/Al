@@ -45,6 +45,7 @@ export class AppComponent {
     { title: 'Deportes', url: '/deportes', icon: 'football' },
     { title: 'Farándula', url: '/farandula', icon: 'star' },
     { title: 'Tendencias', url: '/tendencias', icon: 'trending-up' },
+    { title: 'Contáctanos', url: '/about', icon: 'mail' },
     { title: 'Cupones', url: '/cupones', icon: 'gift' },
     { title: 'Registrar Noticia', url: '/agregar', icon: 'add' },
     { title: 'Agregar Publicidad', url: '/publicidad', icon: 'add' },
@@ -59,6 +60,7 @@ export class AppComponent {
     { title: 'Deportes', url: '/deportes', icon: 'football' },
     { title: 'Farándula', url: '/farandula', icon: 'star' },
     { title: 'Tendencias', url: '/tendencias', icon: 'trending-up' },
+    { title: 'Contáctanos', url: '/about', icon: 'mail' }
    
   ];
 
