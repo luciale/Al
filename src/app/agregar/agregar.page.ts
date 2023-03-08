@@ -83,7 +83,8 @@ export class AgregarPage implements OnInit {
         'title': new FormControl("", Validators.required),
         'descripcion': new FormControl("", Validators.required),
         'detalles': new FormControl("", Validators.required),
-        'imagen': new FormControl("", Validators.required)
+        'imagen': new FormControl("", Validators.required),
+        'autor': new FormControl("", Validators.required)
       });
       
       }
@@ -182,7 +183,8 @@ export class AgregarPage implements OnInit {
       'title': new FormControl("", Validators.required),
       'descripcion': new FormControl("", Validators.required),
       'detalles': new FormControl("", Validators.required),
-      'imagen': new FormControl("", Validators.required)
+      'imagen': new FormControl("", Validators.required),
+      'autor': new FormControl("", Validators.required)
     });
     this.newImage='';
     this.newImage1='';
@@ -235,6 +237,7 @@ export class AgregarPage implements OnInit {
 	  image: this.imagen_direccion,
 	  type: this.tipo,
 	  fecha: new Date(),
+    autor: f.autor,
     image1: this.imagen_direccion1,
     image2: this.imagen_direccion2,
     image3: this.imagen_direccion3

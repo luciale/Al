@@ -8,6 +8,7 @@ export interface Noticia{
     image2: string,
     image3: string,
     type: string,
+    autor: string,
     fecha: Date
 
 }
