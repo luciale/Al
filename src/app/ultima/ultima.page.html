@@ -35,14 +35,17 @@
           </ion-row>
             <ion-row>
                <ion-col class="card1-text">{{new.description}}</ion-col>
-               <ion-col> <img [src]="new.image" /></ion-col>
         
+            </ion-row>
+            <ion-row>
+              <ion-col> <img [src]="new.image" /></ion-col>
             </ion-row>
         </ion-grid>
         
   
       </ion-card>
-
+      <ion-button (click)="Eliminar(new.id)" *ngIf ="ingresado"> X
+      </ion-button>
     </ion-col>
   </ion-row>
 

@@ -7,6 +7,9 @@ import {Router} from '@angular/router';
 import {FirestoreService} from '../services/firestore.service';
 import {Noticia} from '../models';
 import {Publicidad} from '../models';
+import {FirebaseauthService} from '../services/firebaseauth.service';
+import { ToastController } from '@ionic/angular';
+import { AlertController } from '@ionic/angular';
 @Component({
   selector: 'app-ultima',
   templateUrl: './ultima.page.html',
@@ -22,6 +25,8 @@ export class UltimaPage implements OnInit {
   vista= true;
   vista1= true;
   slider: any;
+  ingresado: boolean;
+  toast: any;
   slideOptions = {
     initialSlide: 0,
     slidesPerView: 1,
@@ -34,12 +39,24 @@ export class UltimaPage implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
-    private firestore: FirestoreService
+    private firestore: FirestoreService,
+    public firebaseauthService: FirebaseauthService,
+    private alertController: AlertController,private toastController: ToastController
   ) { }
 
-  ngOnInit() {
+  async ngOnInit() {
   
   this.getNoticias();
+  await this.firebaseauthService.stateAuth().subscribe(res =>{
+    console.log(res)
+    if(res!= null){
+      this.ingresado=true;
+      console.log(this.ingresado)
+    }else{
+      this.ingresado= false;
+      console.log(this.ingresado)
+    }
+  })
   this.getPublicidad()
    
   this.getBaners()
@@ -149,5 +166,45 @@ export class UltimaPage implements OnInit {
     await this.getBaners();
 
   }
- 
+  async Eliminar(id:any){
+    const alert = await this.alertController.create({
+      header: 'Desea eliminar la noticia?',
+      cssClass: 'my-custom-class',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          handler: () => {
+            this.alertController.dismiss();
+          },
+        },
+        {
+          text: 'Eliminar',
+          role: 'confirm',
+          handler: () => {
+           this.firestore.deleteDoc('Ultima',id).then(res =>{
+            this.presentToast('Eliminado con éxito');
+            this.alertController.dismiss();
+           }).catch(error=>{
+            this.presentToast('No se pudo eliminar')
+           })
+           
+          },
+        },
+      ],
+    });
+
+    await alert.present();
+
+    
+
+  }
+
+  async presentToast(mess:string){
+    this.toast= await this.toastController.create({
+      message: mess,
+      duration:2000
+    });
+    this.toast.present();
+  }
 }
