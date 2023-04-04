@@ -42,4 +42,9 @@ export class PerfilPage implements OnInit {
       this.router.navigate(['/ultima'])
 
     }
+    async pagar(){
+
+      this.router.navigate(['/paypal-mobile'])
+
+    }
   }
