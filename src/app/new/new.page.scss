@@ -19,6 +19,13 @@ ion-card {
     border-radius: 10px;
 }
 
+.ion-card1 {
+  background-color: #ffffff ;
+  position: relative;
+  text-align: center;
+  border-radius: 15px;
+}
+
 .card-title{
     color: #000000 ;
     font-size: 20px;
@@ -36,4 +43,11 @@ ion-card {
 }
 .card-img{
     width: 100%;
+}
+
+.card-text1{
+  color: var(--ion-color-primary);
+  font-weight: 200 ;
+  margin-top: 8px;
+  margin-bottom: 20px;
 }

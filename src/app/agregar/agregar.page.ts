@@ -53,6 +53,8 @@ export class AgregarPage implements OnInit {
   color: string = '#d435a2';
   categoria: string = 'Categoria';
   cant_imagenes= 0;
+  en_portada= 0;
+  en_portadatxt= 'Agregar a portada?'
   public modulesQuill = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],
@@ -84,7 +86,11 @@ export class AgregarPage implements OnInit {
         'descripcion': new FormControl("", Validators.required),
         'detalles': new FormControl("", Validators.required),
         'imagen': new FormControl("", Validators.required),
-        'autor': new FormControl("", Validators.required)
+        'autor': new FormControl("", Validators.required),
+        'au_im': new FormControl("", Validators.required),
+        'au_im1': new FormControl("", Validators.required),
+        'au_im2': new FormControl("", Validators.required),
+        'au_im3': new FormControl("", Validators.required),
       });
       
       }
@@ -146,7 +152,7 @@ export class AgregarPage implements OnInit {
           label: 'Tendencias',
           value: '5',
           handler: () => {
-            this.categoria= 'Tendencias'
+            this.categoria= 'Tendencias',
             this.tipo= '5'
           },
         },
@@ -163,7 +169,6 @@ export class AgregarPage implements OnInit {
           text: 'Ok',
           handler: data => {
             this.tipo= data
-      
           },
         },
       ],
@@ -184,7 +189,11 @@ export class AgregarPage implements OnInit {
       'descripcion': new FormControl("", Validators.required),
       'detalles': new FormControl("", Validators.required),
       'imagen': new FormControl("", Validators.required),
-      'autor': new FormControl("", Validators.required)
+      'autor': new FormControl("", Validators.required),
+      'au_im': new FormControl("", Validators.required),
+      'au_im1': new FormControl("", Validators.required),
+      'au_im2': new FormControl("", Validators.required),
+      'au_im3': new FormControl("", Validators.required),
     });
     this.newImage='';
     this.newImage1='';
@@ -240,20 +249,25 @@ export class AgregarPage implements OnInit {
     autor: f.autor,
     image1: this.imagen_direccion1,
     image2: this.imagen_direccion2,
-    image3: this.imagen_direccion3
+    image3: this.imagen_direccion3,
+    au_im: 'Fotografía tomada por: ' + f.au_im,
+    au_im1: 'Fotografía tomada por: ' + f.au_im1,
+    au_im2: 'Fotografía tomada por: ' + f.au_im2,
+    au_im3: 'Fotografía tomada por: ' + f.au_im3,
     }
-  console.log(noticia)
+  
 
 
   
+
   for(let i =0; i< this.news.length;i++){
-    if(this.news[i].type== this.tipo && this.tipo!=6){
+    if(this.news[i].type== this.tipo && this.tipo!=6 && this.en_portada==1){
      await this.firestore.deleteDoc('Ultima',this.news[i].id);
     }
    }
  await this.firestore.createDoc(noticia, 'Noticias/',noticia.id);
 
- if(this.tipo!=6){
+ if(this.tipo!=6 && this.en_portada==1){
    await this.firestore.createDoc(noticia, 'Ultima',noticia.id);
  }
  
@@ -340,7 +354,27 @@ export class AgregarPage implements OnInit {
       )
     }
     async Eliminar(){
-      console.log("se va a eliminar")
+      if(this.cant_imagenes===0){
+        this.newImage= ''
+        this.newFile= ''
+        this.cant_imagenes = 0
+      }
+      if(this.cant_imagenes===1){
+        this.newImage1= ''
+        this.newFile1= ''
+        this.cant_imagenes = this.cant_imagenes -1
+      }
+      if(this.cant_imagenes===2){
+        this.newImage2= ''
+        this.newFile2= ''
+        this.cant_imagenes = this.cant_imagenes -1
+      }
+      if(this.cant_imagenes===3){
+        this.newImage3= ''
+        this.newFile3= ''
+        this.cant_imagenes = this.cant_imagenes -1
+      }
+
     }
 	async handleChange(e:any){
 		this.tipo= e.detail.value
@@ -368,7 +402,6 @@ export class AgregarPage implements OnInit {
     async agregarImagen(){
       if(this.cant_imagenes< 4){
         this.cant_imagenes = this.cant_imagenes +1; 
-        console.log(this.cant_imagenes)
       }
     
     }
@@ -377,4 +410,54 @@ export class AgregarPage implements OnInit {
           this.htmlContent = event.html;
         }
     }
+
+    async presentAlertRadio1() {
+      const alert = await this.alertController.create({
+        cssClass: 'my-custom-class',
+        header: 'Radio',
+        inputs: [
+          {
+            name: 'Si',
+            type: 'radio',
+            label: 'Si',
+            value: '1',
+            handler: () => {
+              this.en_portadatxt = 'SI Agregar a la Portada'
+             this.en_portada =1
+            },
+          },
+          {
+            name: 'No',
+            type: 'radio',
+            label: 'No',
+            value: '2',
+            handler: () => {
+              this.en_portadatxt = 'NO Agregar a la Portada'
+              this.en_portada =0;
+            },
+          },
+          
+        ],
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'cancel',
+            handler: () => {
+              this.en_portadatxt = 'Agregar a la portada?'
+              this.en_portada= 0
+            },
+          },
+          {
+            text: 'Ok',
+            handler: data => {
+              this.tipo= data
+        
+            },
+          },
+        ],
+      });
+  
+      await alert.present();
+    }
+  
  }

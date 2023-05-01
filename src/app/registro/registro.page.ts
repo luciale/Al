@@ -23,6 +23,7 @@ export class RegistroPage implements OnInit {
   loading: any;
   toast: any;
   creado= 1;
+  genero_txt= 'Género';
   constructor(public fb: FormBuilder,  public alertController: AlertController ,public firebaseauthService: FirebaseauthService,
     private firestore: FirestoreService,
     public loadingController: LoadingController,
@@ -89,7 +90,7 @@ export class RegistroPage implements OnInit {
       nombre: f.nombre,
       genero: this.genero,
       email: f.correo,
-      type: 1,
+      type: 2,
       id: this.firestore.getId(),
     }
  
@@ -123,6 +124,7 @@ export class RegistroPage implements OnInit {
           value: '0',
           handler: () => {
            this.genero= '0'
+           this.genero_txt = 'Femenino'
           },
         },
         {
@@ -132,6 +134,7 @@ export class RegistroPage implements OnInit {
           value: '1',
           handler: () => {
             this.genero= '1'
+            this.genero_txt = 'Masculino'
           },
         },
       ],
@@ -147,7 +150,6 @@ export class RegistroPage implements OnInit {
           text: 'Ok',
           handler: data => {
             this.genero= data
-      
           },
         },
       ],

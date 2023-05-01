@@ -14,15 +14,14 @@ export class AppComponent {
     
     await this.firebaseauthService.stateAuth().subscribe(res =>{
       if(res!= null){
-        console.log(res.email)
         this.firestore.getCollection1<Usuario>('Usuario').subscribe( res1 => {
           for(let i= 0; i< res1.length; i++){
             if(res1[i].email== res.email){
           
              this.tipo= Number(res1[i].type)
-             this.ingresado=true;
             }
           }
+        
         })
    
    
@@ -45,11 +44,12 @@ export class AppComponent {
     { title: 'Deportes', url: '/deportes', icon: 'football' },
     { title: 'Farándula', url: '/farandula', icon: 'star' },
     { title: 'Tendencias', url: '/tendencias', icon: 'trending-up' },
-    { title: 'Contáctanos', url: '/about', icon: 'mail' },
     { title: 'Cupones', url: '/cupones', icon: 'gift' },
+    { title: 'Contáctanos', url: '/about', icon: 'mail' },
     { title: 'Registrar Noticia', url: '/agregar', icon: 'add' },
     { title: 'Agregar Publicidad', url: '/publicidad', icon: 'add' },
     { title: 'Agregar Baner', url: '/baners', icon: 'add' },
+    { title: 'Términos y Condiciones', url: '/terminos', icon: 'document-text' },
 
   ];
   public appPages1 = [
@@ -60,7 +60,22 @@ export class AppComponent {
     { title: 'Deportes', url: '/deportes', icon: 'football' },
     { title: 'Farándula', url: '/farandula', icon: 'star' },
     { title: 'Tendencias', url: '/tendencias', icon: 'trending-up' },
-    { title: 'Contáctanos', url: '/about', icon: 'mail' }
+    { title: 'Cupones', url: '/cupones', icon: 'gift' },
+    { title: 'Contáctanos', url: '/about', icon: 'mail' },
+    { title: 'Términos y Condiciones', url: '/terminos', icon: 'document-text' },
+   
+  ];
+  public appPages2 = [
+    { title: 'Perfil', url: '/perfil', icon: 'person' },
+    { title: 'Portada', url: '/ultima', icon: 'time' },
+    { title: 'Nacionales', url: '/nacionales', icon: 'newspaper' },
+    { title: 'Internacionales', url: '/internacionales', icon: 'globe' },
+    { title: 'Deportes', url: '/deportes', icon: 'football' },
+    { title: 'Farándula', url: '/farandula', icon: 'star' },
+    { title: 'Tendencias', url: '/tendencias', icon: 'trending-up' },
+    { title: 'Cupones', url: '/cupones', icon: 'gift' },
+    { title: 'Contáctanos', url: '/about', icon: 'mail' },
+    { title: 'Términos y Condiciones', url: '/terminos', icon: 'document-text' },
    
   ];
 

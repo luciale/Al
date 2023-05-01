@@ -7,6 +7,7 @@ import {Noticia,Publicidad} from '../models';
 import { ToastController } from '@ionic/angular';
 import {FirebaseauthService} from '../services/firebaseauth.service';
 import { AlertController } from '@ionic/angular';
+import {Usuario} from '../../app/models';
 @Component({
   selector: 'app-nacionales',
   templateUrl: './nacionales.page.html',
@@ -35,13 +36,23 @@ export class NacionalesPage implements OnInit {
   async ngOnInit() {
     this.getNoticias()
     await this.firebaseauthService.stateAuth().subscribe(res =>{
-      console.log(res)
       if(res!= null){
-        this.ingresado=true;
-        console.log(this.ingresado)
+        this.firestore.getCollection1<Usuario>('Usuario').subscribe( res1 => {
+          for(let i= 0; i< res1.length; i++){
+            if(res1[i].email== res.email){
+            
+             var tipo= Number(res1[i].type)
+             if(tipo ===1){
+              this.ingresado= true;
+             }
+             else{ this.ingresado = false;}
+            }
+          }
+        
+        })
+     
       }else{
         this.ingresado= false;
-        console.log(this.ingresado)
       }
     })
     
@@ -165,7 +176,6 @@ export class NacionalesPage implements OnInit {
        
         let v = this.getRandomInt(0,this.publicidad.length);
         this.ban= this.baners[v];
-        console.log(this.ban)
       })
       
     }
@@ -180,5 +190,9 @@ export class NacionalesPage implements OnInit {
       this.vista= false;
       await this.getBaners();
 
+    }
+
+    async Editar(){
+      this.router.navigate(['/editarnota',this.new_u.id])
     }
 }

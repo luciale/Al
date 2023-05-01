@@ -1,0 +1,45 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Eitar Noticia</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class ="card-title">Edición de Noticia</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formularioRegistro" (keyup.enter)="submitForm()">
+        <ion-item>
+          <ion-label position="floating">Titulo</ion-label>
+          <ion-input formControlName="title"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Descripcion</ion-label>
+          <ion-input formControlName="descripcion"  ></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-textarea placeholder="Detalles" [autoGrow]="true"
+          formControlName="detalles" ></ion-textarea>
+         </ion-item>
+         <ion-item>
+               
+          <ion-label position="floating">Autor</ion-label>
+          <ion-input formControlName="autor"  ></ion-input>
+
+            </ion-item>
+        <br>
+        <ion-button (click)="guardar()">Guardar
+        </ion-button>
+      </form>
+    </ion-card-content>
+    
+  </ion-card>
+
+
+</ion-content>

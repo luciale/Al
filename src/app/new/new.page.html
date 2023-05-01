@@ -9,10 +9,10 @@
 
 <ion-content>
   <ion-slides   #slider loop="true" pager="true" [options]=" slideOptions"  >
-    <ion-slide  *ngFor ="let imagen of list_imagenes">
-      <ion-card >
-        <img img [src]="imagen" />
-        
+    <ion-slide  *ngFor ="let imagen of list_im">
+      <ion-card class= "ion-card1" >
+        <img img [src]="imagen.imagen_url" />
+        <div class= "card-text1">{{imagen.imagen_txt}}</div>
       </ion-card>
 
     </ion-slide>
@@ -27,6 +27,9 @@
       <ion-textarea>
         {{new_u.details}}
       </ion-textarea>
+      <ion-text>
+        {{new_u.autor}}
+      </ion-text>
       </div>
   </ion-card>
 

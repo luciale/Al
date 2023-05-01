@@ -26,12 +26,17 @@
                
             </ion-row>
             <ion-row>
-              <ion-col> <img [src]="new.image" /></ion-col>
+              <ion-col class="card1-text">{{new.autor}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col> <img [src]="new.image" /> {{new.au_im}}</ion-col>
             </ion-row>
         </ion-grid>
       
       </ion-card>
       <ion-button (click)="Eliminar(new.id)" *ngIf ="ingresado"> X
+      </ion-button>
+      <ion-button  *ngIf ="ingresado" [routerLink]="['/editarnota',new.id]"> Editar
       </ion-button>
     </ion-col>
   </ion-row>

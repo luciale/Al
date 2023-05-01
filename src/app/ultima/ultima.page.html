@@ -17,6 +17,7 @@
       <ion-card (click) = "goToRoute(new)">
         <img [src]="new.image" />
         <div class= "card-title">{{new.title}} </div>
+        <div class= "card-text1">{{new.au_im}}</div>
       </ion-card>
 
     </ion-slide>
@@ -35,16 +36,19 @@
           </ion-row>
             <ion-row>
                <ion-col class="card1-text">{{new.description}}</ion-col>
-        
             </ion-row>
             <ion-row>
-              <ion-col> <img [src]="new.image" /></ion-col>
+              <ion-col class="card1-text">{{new.autor}}</ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col> <img [src]="new.image" /> {{new.au_im}}</ion-col>
+               
             </ion-row>
         </ion-grid>
         
   
       </ion-card>
-      <ion-button (click)="Eliminar(new.id)" *ngIf ="ingresado"> X
+      <ion-button (click)="Eliminar(new.id)" *ngIf ="ingresado"> Eliminar de Portada
       </ion-button>
     </ion-col>
   </ion-row>

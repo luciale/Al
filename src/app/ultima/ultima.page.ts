@@ -51,10 +51,8 @@ export class UltimaPage implements OnInit {
     console.log(res)
     if(res!= null){
       this.ingresado=true;
-      console.log(this.ingresado)
     }else{
       this.ingresado= false;
-      console.log(this.ingresado)
     }
   })
   this.getPublicidad()

@@ -4,9 +4,13 @@ export interface Noticia{
     description: string,
     details: string,
     image: string,
+    au_im: string,
     image1: string,
+    au_im1: string,
     image2: string,
+    au_im2: string,
     image3: string,
+    au_im3: string,
     type: string,
     autor: string,
     fecha: Date

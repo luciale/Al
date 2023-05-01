@@ -43,30 +43,67 @@
           </ion-button>
         
         </ion-item>
+        <ion-item >
+          <ion-button (click)="presentAlertRadio1()"> {{this.en_portadatxt}}
+          </ion-button>
+        
+        </ion-item>
       
         <ion-item *ngIf ="this.cant_imagenes === 0">
        <ion-input  icon-left large type="file" (change)="newImageU($event)" formControlName="imagen"><ion-icon name ="images"></ion-icon></ion-input>
         </ion-item>
+        <ion-item *ngIf ="this.cant_imagenes === 0">     
+          <ion-label position="floating">Fotografía tomada por</ion-label>
+          <ion-input formControlName="au_im"  ></ion-input>
+        </ion-item>
         <ion-item *ngIf ="newImage != ''">
           <img [src]="newImage"   />
+        </ion-item>
+        <ion-item *ngIf ="newImage != '' && this.cant_imagenes === 0">
+          <ion-button (click)="Eliminar()" > Eliminar Imagen 
+          </ion-button>
         </ion-item>
         <ion-item *ngIf ="this.cant_imagenes === 1">
           <ion-input  icon-left large type="file" (change)="newImageU1($event)" formControlName="imagen"><ion-icon name ="images"></ion-icon></ion-input>
         </ion-item>
+        <ion-item *ngIf ="this.cant_imagenes === 1">     
+          <ion-label position="floating">Fotografía tomada por</ion-label>
+          <ion-input formControlName="au_im1"  ></ion-input>
+        </ion-item>
         <ion-item *ngIf ="newImage1 != ''">
           <img [src]="newImage1"   />
+        </ion-item>
+        <ion-item *ngIf ="newImage1 != '' && this.cant_imagenes === 1">
+          <ion-button (click)="Eliminar()" > Eliminar Imagen 
+          </ion-button>
         </ion-item>
         <ion-item *ngIf ="this.cant_imagenes === 2">
           <ion-input  icon-left large type="file" (change)="newImageU2($event)" formControlName="imagen"><ion-icon name ="images"></ion-icon></ion-input>
         </ion-item>
+        <ion-item *ngIf ="this.cant_imagenes === 2">     
+          <ion-label position="floating">Fotografía tomada por</ion-label>
+          <ion-input formControlName="au_im2"  ></ion-input>
+        </ion-item>
         <ion-item *ngIf ="newImage2 != ''">
           <img [src]="newImage2"   />
+        </ion-item>
+        <ion-item *ngIf ="newImage2 != '' && this.cant_imagenes === 2">
+          <ion-button (click)="Eliminar()" > Eliminar Imagen 
+          </ion-button>
         </ion-item>
         <ion-item *ngIf ="this.cant_imagenes === 3">
           <ion-input  icon-left large type="file" (change)="newImageU3($event)" formControlName="imagen"><ion-icon name ="images"></ion-icon></ion-input>
         </ion-item>
+        <ion-item *ngIf ="this.cant_imagenes === 3">     
+          <ion-label position="floating">Fotografía tomada por</ion-label>
+          <ion-input formControlName="au_im3"  ></ion-input>
+        </ion-item>
         <ion-item *ngIf ="newImage3 != ''">
           <img [src]="newImage3"   />
+        </ion-item>
+        <ion-item *ngIf ="newImage3 != '' && this.cant_imagenes === 3">
+          <ion-button (click)="Eliminar()" > Eliminar Imagen 
+          </ion-button>
         </ion-item>
         <ion-item *ngIf = "this.cant_imagenes < 3 && (newImage != ''  || newImage1 != '' || newImage2 != '' || newImage3 != '')" (click) = "agregarImagen()">
           <ion-button>

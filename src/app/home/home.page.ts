@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-
-  constructor() { }
+  darkMode: boolean = false;
+  constructor() { const prefersDark = window.matchMedia('(prefers-color-scheme: dark)');
+  this.darkMode = prefersDark.matches;}
 
   ngOnInit() {
   }

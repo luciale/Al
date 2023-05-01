@@ -56,7 +56,8 @@ const routes: Routes = [
   {
     path: 'publicidad',
     loadChildren: () => import('./publicidad/publicidad.module').then( m => m.PublicidadPageModule)
-  },  {
+  },
+  {
     path: 'baners',
     loadChildren: () => import('./baners/baners.module').then( m => m.BanersPageModule)
   },
@@ -75,7 +76,15 @@ const routes: Routes = [
   {
     path: 'paypal-mobile',
     loadChildren: () => import('./paypal-mobile/paypal-mobile.module').then( m => m.PaypalMobilePageModule)
+  },
+  {
+    path: 'editarnota/:id',
+    loadChildren: () => import('./editarnota/editarnota.module').then( m => m.EditarnotaPageModule)
+  },  {
+    path: 'terminos',
+    loadChildren: () => import('./terminos/terminos.module').then( m => m.TerminosPageModule)
   }
+
 
 
 ];

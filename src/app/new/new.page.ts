@@ -16,7 +16,7 @@ export class NewPage implements OnInit {
   id: any;
   new_u: any;
   type_title : any;
-  list_imagenes: string[] = [];
+  list_im : any[] = [];
   slideOptions = {
     initialSlide: 0,
     slidesPerView: 1,
@@ -38,22 +38,36 @@ export class NewPage implements OnInit {
    await this.firestore.getCollection1<Noticia>('Noticias').subscribe( res => {
       for(let i= 0; i< res.length; i++){
         if(res[i].id==id){
-        
+          var data = {
+            imagen_url : res[i].image,
+            imagen_txt: res[i].au_im
+          }
           this.new_u=(res[i])
-          this.list_imagenes.push(res[i].image)
+          this.list_im.push(data)
           if(res[i].image1===null){
 
           }else{
          
-            
-            this.list_imagenes.push(res[i].image1)
+            var data = {
+              imagen_url : res[i].image1,
+              imagen_txt:  res[i].au_im1
+            }
+            this.list_im.push(data)
             if(res[i].image2===null){
           
             }else{
-              this.list_imagenes.push(res[i].image2)
+              var data = {
+                imagen_url : res[i].image2,
+                imagen_txt: res[i].au_im2
+              }
+              this.list_im.push(data)
               if(res[i].image2===null){}
               else{
-                this.list_imagenes.push(res[i].image3)
+                var data = {
+                  imagen_url : res[i].image3,
+                  imagen_txt:  res[i].au_im3
+                }
+                this.list_im.push(data)
               }
             }
            
