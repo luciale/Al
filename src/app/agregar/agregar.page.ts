@@ -104,7 +104,7 @@ export class AgregarPage implements OnInit {
   async presentAlertRadio() {
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header: 'Radio',
+      header: 'Categoría',
       inputs: [
         {
           name: 'Nacionales',
@@ -260,17 +260,14 @@ export class AgregarPage implements OnInit {
 
   
 
-  for(let i =0; i< this.news.length;i++){
-    if(this.news[i].type== this.tipo && this.tipo!=6 && this.en_portada==1){
-     await this.firestore.deleteDoc('Ultima',this.news[i].id);
-    }
-   }
+  
  await this.firestore.createDoc(noticia, 'Noticias/',noticia.id);
 
  if(this.tipo!=6 && this.en_portada==1){
-   await this.firestore.createDoc(noticia, 'Ultima',noticia.id);
+   await this.firestore.createDoc(noticia, 'Ultima/',noticia.id);
  }
- 
+
+
 	
   }
   async DELT(tipo: any){
@@ -414,7 +411,7 @@ export class AgregarPage implements OnInit {
     async presentAlertRadio1() {
       const alert = await this.alertController.create({
         cssClass: 'my-custom-class',
-        header: 'Radio',
+        header: 'Agregar a Portada',
         inputs: [
           {
             name: 'Si',
@@ -423,7 +420,7 @@ export class AgregarPage implements OnInit {
             value: '1',
             handler: () => {
               this.en_portadatxt = 'SI Agregar a la Portada'
-             this.en_portada =1
+             this.en_portada = 1
             },
           },
           {
@@ -433,7 +430,7 @@ export class AgregarPage implements OnInit {
             value: '2',
             handler: () => {
               this.en_portadatxt = 'NO Agregar a la Portada'
-              this.en_portada =0;
+              this.en_portada = 0
             },
           },
           
@@ -450,7 +447,7 @@ export class AgregarPage implements OnInit {
           {
             text: 'Ok',
             handler: data => {
-              this.tipo= data
+              this.en_portada= data
         
             },
           },
