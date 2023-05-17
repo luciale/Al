@@ -74,16 +74,14 @@ const routes: Routes = [
     loadChildren: () => import('./about/about.module').then( m => m.AboutPageModule)
   },
   {
-    path: 'paypal-mobile',
-    loadChildren: () => import('./paypal-mobile/paypal-mobile.module').then( m => m.PaypalMobilePageModule)
-  },
-  {
     path: 'editarnota/:id',
     loadChildren: () => import('./editarnota/editarnota.module').then( m => m.EditarnotaPageModule)
-  },  {
+  },
+  {
     path: 'terminos',
     loadChildren: () => import('./terminos/terminos.module').then( m => m.TerminosPageModule)
-  }
+  },
+ 
 
 
 

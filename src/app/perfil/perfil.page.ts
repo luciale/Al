@@ -38,13 +38,14 @@ export class PerfilPage implements OnInit {
     })
     }
     async salir(){
-      this.firebaseauthService.logut();
-      this.router.navigate(['/ultima'])
+      await this.firebaseauthService.logut();
+      window.location.reload()
+
 
     }
-    async pagar(){
-
-      this.router.navigate(['/paypal-mobile'])
-
+    async eliminar(){
+      await this.firebaseauthService.delete();
+      window.location.reload()
+      
     }
   }

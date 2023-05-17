@@ -19,9 +19,9 @@ public creado: any;
       this.creado=0;
     })
   }
-  logut(){
+  async logut(){
     this.auth.signOut().then((res)=>{
-      this.router.navigate(['/ultima'])
+ 
     }).catch((error)=>{
       this.creado=0;
     })
@@ -55,5 +55,8 @@ public creado: any;
     }else{
       return user.email;
     }
+  }
+  async delete(){
+    this.auth.currentUser.then(user => user?.delete())
   }
 }
