@@ -8,7 +8,7 @@ import { FormsModule ,ReactiveFormsModule} from '@angular/forms';
 import { AgregarPage } from './agregar.page';
 
 import { FileUploadOptions,FileTransferObject ,FileTransfer }  from '@awesome-cordova-plugins/file-transfer/ngx';
-import { ImagePicker, ImagePickerOptions } from '@awesome-cordova-plugins/image-picker/ngx';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -18,6 +18,6 @@ import { ImagePicker, ImagePickerOptions } from '@awesome-cordova-plugins/image-
     ReactiveFormsModule,
   ],
   declarations: [AgregarPage],
-  providers: [FileTransfer,ImagePicker]
+  providers: [FileTransfer]
 })
 export class AgregarPageModule {}

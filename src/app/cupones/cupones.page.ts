@@ -4,6 +4,8 @@ import {FirestoreService} from '../services/firestore.service';
 import {FirebaseauthService} from '../services/firebaseauth.service';
 import {  AlertController } from '@ionic/angular';
 import { ToastController } from '@ionic/angular';
+import {Router} from '@angular/router';
+import { PaymentService } from '../services/payment.service';
 @Component({
   selector: 'app-cupones',
   templateUrl: './cupones.page.html',
@@ -13,9 +15,12 @@ export class CuponesPage implements OnInit {
   news : Publicidad[] = [];
   ingresado: boolean;
   toast: any;
-  constructor(public firebaseauthService: FirebaseauthService,private firestore: FirestoreService,private alertController: AlertController,private toastController: ToastController) { }
+  isPro = false;
+  constructor(public firebaseauthService: FirebaseauthService,private firestore: FirestoreService,private alertController: AlertController,private toastController: ToastController,
+    private router: Router, private payments: PaymentService) { }
 
  async ngOnInit() {
+  this.isPro = await this.payments.getPro();
     await this.firebaseauthService.stateAuth().subscribe(res =>{
       console.log(res)
       if(res!= null){
@@ -77,6 +82,7 @@ export class CuponesPage implements OnInit {
            this.firestore.deleteDoc('Publicidad/',id).then(res =>{
             this.presentToast('Eliminado con éxito');
             this.alertController.dismiss();
+            window.location.reload()
            }).catch(error=>{
             this.presentToast('No se pudo eliminar')
            })
@@ -91,5 +97,7 @@ export class CuponesPage implements OnInit {
     
 
   }
-
+  goPay(){
+    this.router.navigate(['/payment'])
+  }
 }

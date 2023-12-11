@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ImagePicker, ImagePickerOptions } from '@awesome-cordova-plugins/image-picker/ngx';
+
 import { ActionSheetController, AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { LoadingController, Platform, ToastController } from '@ionic/angular';
@@ -80,7 +80,7 @@ export class AgregarPage implements OnInit {
     private alertController: AlertController,
 		private firestore: FirestoreService,
     public loadingController: LoadingController,
-     private imagepicker: ImagePicker, public actionSheetController: ActionSheetController,public firebaseauthService: FirebaseauthService) {
+     public actionSheetController: ActionSheetController,public firebaseauthService: FirebaseauthService) {
       this.formularioRegistro = this.fb.group({
         'title': new FormControl("", Validators.required),
         'descripcion': new FormControl("", Validators.required),

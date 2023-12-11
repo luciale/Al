@@ -7,7 +7,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf = "isPro">
   <ion-row>
     <ion-col sizeLg="6" sizeMd="6" sizeXs="12" *ngFor ="let new of news">
       <ion-card class="card1">
@@ -22,4 +22,10 @@
       </ion-button>
     </ion-col>
   </ion-row>
+</ion-content>
+
+<ion-content *ngIf = "!isPro">
+  <ion-card >
+    <img img class="img2" [src]="'https://firebasestorage.googleapis.com/v0/b/alinstanteguate.appspot.com/o/Hazte%20Premium.jpg?alt=media&token=78c0cde0-8851-4670-b9d5-20eb9e8a9b4b'"  (click)="goPay()"/>
+  </ion-card>
 </ion-content>

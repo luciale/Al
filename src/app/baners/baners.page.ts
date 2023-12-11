@@ -241,6 +241,7 @@ export class BanersPage implements OnInit {
              this.firestore.deleteDoc('Baner/',id).then(res =>{
               this.presentToast('Eliminado con éxito');
               this.alertController.dismiss();
+              window.location.reload()
              }).catch(error=>{
               this.presentToast('No se pudo eliminar')
              })

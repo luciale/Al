@@ -3,6 +3,7 @@ import {FirebaseauthService} from '../services/firebaseauth.service';
 import {FirestoreService} from '../services/firestore.service';
 import {Usuario} from '../models';
 import {Router} from '@angular/router';
+import { PaymentService } from '../services/payment.service';
 
 @Component({
   selector: 'app-perfil',
@@ -10,15 +11,17 @@ import {Router} from '@angular/router';
   styleUrls: ['./perfil.page.scss'],
 })
 export class PerfilPage implements OnInit {
-
+  isPro = false;
   us: any = {};
+  ingresado: boolean;
   constructor(public firebaseauthService: FirebaseauthService,private firestore: FirestoreService,
-    private router: Router) { }
+    private router: Router, private payments: PaymentService) { }
 
   async ngOnInit() {
+    this.isPro = await this.payments.getPro();
     await this.firebaseauthService.stateAuth().subscribe(res =>{
       if(res!= null){
-        console.log(res.email)
+        this.ingresado=true;
         this.firestore.getCollection1<Usuario>('Usuario').subscribe( res1 => {
           for(let i= 0; i< res1.length; i++){
             if(res1[i].email== res.email){
@@ -33,19 +36,30 @@ export class PerfilPage implements OnInit {
     
    
       }else{
-      
+        this.ingresado=false;
       }
     })
     }
     async salir(){
       await this.firebaseauthService.logut();
       window.location.reload()
-
+      //this.router.navigate(['/login'])
 
     }
     async eliminar(){
       await this.firebaseauthService.delete();
       window.location.reload()
       
+    }
+    
+    goPay(){
+      this.router.navigate(['/payment'])
+    }
+
+    goLogin(){
+      this.router.navigate(['/login'])
+    }
+    goRegistro(){
+      this.router.navigate(['/registro'])
     }
   }

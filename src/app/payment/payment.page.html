@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Suscripción</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="card-title"> Hazte Premium </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-list>
+        <ion-item button *ngFor = "let p of products" (click) = "purchase(p)" detail = "false">
+          <ion-label class= "ion-text-wrap">
+            {{p.title}}
+            <p> {{p.description}}</p>
+          </ion-label>
+          <ion-button slot ="end">
+            {{p.price}} {{p.currency}}
+          </ion-button>
+
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+
+ 
+ 
+</ion-content>
+

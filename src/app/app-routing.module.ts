@@ -81,6 +81,11 @@ const routes: Routes = [
     path: 'terminos',
     loadChildren: () => import('./terminos/terminos.module').then( m => m.TerminosPageModule)
   },
+  {
+    path: 'payment',
+    loadChildren: () => import('./payment/payment.module').then( m => m.PaymentPageModule)
+  },
+
  
 
 

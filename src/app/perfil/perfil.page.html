@@ -7,10 +7,10 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf ="ingresado=== true">
   <ion-card>
   
-    <ion-grid>
+    <ion-grid >
      <ion-row>
       <ion-col class="card1-title">{{us.nombre}}</ion-col>
      </ion-row>
@@ -24,5 +24,26 @@
     </ion-grid>
     
   </ion-card>
+  <ion-card *ngIf = "!isPro">
+    <img img class="img2" [src]="'https://firebasestorage.googleapis.com/v0/b/alinstanteguate.appspot.com/o/Hazte%20Premium.jpg?alt=media&token=78c0cde0-8851-4670-b9d5-20eb9e8a9b4b'"  (click)="goPay()"/>
+  </ion-card>
 </ion-content>
+
+
+<ion-content *ngIf ="ingresado=== false">
+  <ion-card>
+  
+    <ion-grid >
+ 
+    
+   <ion-button (click)="goLogin()">Iniciar Sesión
+  </ion-button>
+   <ion-button (click)="goRegistro()">Registrarse
+  </ion-button>
+    </ion-grid>
+    
+  </ion-card>
+
+</ion-content>
+
 

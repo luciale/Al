@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import {FirebaseauthService} from '../app/services/firebaseauth.service';
 import {FirestoreService} from '../app/services/firestore.service';
 import {Usuario} from '../app/models';
+import { ChangeDetectorRef } from '@angular/core';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -79,5 +81,10 @@ export class AppComponent {
    
   ];
 
-  constructor( public firebaseauthService: FirebaseauthService,private firestore: FirestoreService) {}
+  constructor( public firebaseauthService: FirebaseauthService,private firestore: FirestoreService, changeDetectorRef: ChangeDetectorRef,) {}
+   
+  
+
 }
+
+

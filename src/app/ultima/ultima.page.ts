@@ -10,6 +10,7 @@ import {Publicidad} from '../models';
 import {FirebaseauthService} from '../services/firebaseauth.service';
 import { ToastController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
+import {Usuario} from '../../app/models';
 @Component({
   selector: 'app-ultima',
   templateUrl: './ultima.page.html',
@@ -48,9 +49,21 @@ export class UltimaPage implements OnInit {
   
   this.getNoticias();
   await this.firebaseauthService.stateAuth().subscribe(res =>{
-    console.log(res)
     if(res!= null){
-      this.ingresado=true;
+      this.firestore.getCollection1<Usuario>('Usuario').subscribe( res1 => {
+        for(let i= 0; i< res1.length; i++){
+          if(res1[i].email== res.email){
+          
+           var tipo= Number(res1[i].type)
+           if(tipo ===1){
+            this.ingresado= true;
+           }
+           else{ this.ingresado = false;}
+          }
+        }
+      
+      })
+   
     }else{
       this.ingresado= false;
     }
@@ -183,6 +196,7 @@ export class UltimaPage implements OnInit {
            this.firestore.deleteDoc('Ultima',id).then(res =>{
             this.presentToast('Eliminado con éxito');
             this.alertController.dismiss();
+            window.location.reload()
            }).catch(error=>{
             this.presentToast('No se pudo eliminar')
            })
