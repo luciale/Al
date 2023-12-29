@@ -13,7 +13,9 @@ export interface Noticia{
     au_im3: string,
     type: string,
     autor: string,
-    fecha: Date
+    fecha: Date,
+    titulolink: string,
+    link: string
 
 }
 export interface Usuario{

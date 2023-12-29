@@ -27,9 +27,16 @@
       <ion-textarea>
         {{new_u.details}}
       </ion-textarea>
+      <ion-text *ngIf = "new_u.link">
+        <a href={{new_u.link}} target="_blank" class="ion-underline">{{new_u.titulolink}}</a>
+      </ion-text>
+      <br>
+      <br>
       <ion-text>
         {{new_u.autor}}
       </ion-text>
+      
+    
       </div>
   </ion-card>
 

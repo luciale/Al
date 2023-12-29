@@ -40,6 +40,8 @@ export class EditarnotaPage implements OnInit {
       'descripcion': new FormControl("", Validators.required),
       'detalles': new FormControl("", Validators.required),
       'autor': new FormControl("", Validators.required),
+      'titulolink': new FormControl(""),
+      'link': new FormControl(""),
     });
   }
 
@@ -70,6 +72,8 @@ export class EditarnotaPage implements OnInit {
         'descripcion': new FormControl("", Validators.required),
         'detalles': new FormControl("", Validators.required),
         'autor': new FormControl("", Validators.required),
+        'titulolink': new FormControl(""),
+        'link': new FormControl(""),
        });
       }).catch(error =>{
    
@@ -103,6 +107,8 @@ export class EditarnotaPage implements OnInit {
       type: this.new_u.type,
       fecha: new Date(),
       autor: f.autor,
+      titulolink: f.titulolink? f.titulolink: null,
+      link: f.link ? f.link : null,
       image1: this.new_u.image1,
       image2: this.new_u.image2,
       image3: this.new_u.image3,
@@ -149,6 +155,9 @@ export class EditarnotaPage implements OnInit {
             'descripcion': res[i].description,
             'detalles': res[i].details,
             'autor': res[i].autor,
+            'titulolink': res[i].titulolink,
+            'link': res[i].link,
+
           });
           }
           this.type_title = this.getType(this.new_u.type);
