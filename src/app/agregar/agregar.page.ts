@@ -256,10 +256,10 @@ export class AgregarPage implements OnInit {
     image1: this.imagen_direccion1,
     image2: this.imagen_direccion2,
     image3: this.imagen_direccion3,
-    au_im: 'Fotografía tomada por: ' + f.au_im,
-    au_im1: 'Fotografía tomada por: ' + f.au_im1,
-    au_im2: 'Fotografía tomada por: ' + f.au_im2,
-    au_im3: 'Fotografía tomada por: ' + f.au_im3,
+    au_im:  f.au_im,
+    au_im1: f.au_im1,
+    au_im2:  f.au_im2,
+    au_im3: f.au_im3,
     }
   
 
